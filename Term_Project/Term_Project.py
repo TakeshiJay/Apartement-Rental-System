@@ -11,6 +11,7 @@
 # The apartment class stores every instance of a Tenate into our class. It is simply an array
 # of Tenate objects in the apartment building
 class Apartment:
+    
     # init function is the default constructor(A.K.A the place where all of our Tenate objects are
     # stored) This constructor runs in a time complexity of T(n) = Θ(1) based on initialization of 
     # our tenates list. 
@@ -33,17 +34,21 @@ class Apartment:
         for i in self.tenate_list:
             if i.Name == name:
                 self.tenate_list.remove(i)
+    
+    def add_expenses(self,expense):
+        self.monthly_expenses.append(expense)
 
 # Tenate class will be used to help assist our apartment class which the objects
 # will be appended to our apartment list
 class Tenate:
+    
     # init function is the overloaded constructor for our class
     # @param Name is the name of our Tenate
     # @param Apart_No is an integer that will determine our apartment Number
     def __init__(self, Name, Apart_No):
         self.Name = Name
         self.Apart_No = Apart_No
-        self.payment_list = [0]*11 # an empty list of 12 elements(12 being the No. of months in a year)
+        self.payment_list = [0]*11 # an list of 12 zero elements(12 representing the No. of months in a year)
         
     # record_payment function will be our transaction amount that will be
     # recorded in our bookings. All information stored will be directed by 
@@ -53,10 +58,44 @@ class Tenate:
     def record_payment(self, index, amount):
         self.payment_list.insert(index, amount)
         
-tn = Tenate("Jacob",343)
-print(tn.Name, tn.Apart_No)
-month = 1
-tn.record_payment(month-1,1200)
+    # print_rental_income will be like a _toString_ function when we print out the monthly
+    # payments for each person in the bookings. Its main priority is to print each persons 
+    # apartment number and rental income as follows. This function runs in a time complexity
+    # of T(n) = Θ(1) such that we are only printing out the payment list and apartment number
+    def print_rental_income(self):
+        #Prints as follows(Apartment Number-> print list and separate by n spaces)
+        print(self.Apart_No, *self.payment_list, sep=" ")
 
-for i in tn.payment_list:
-    print(i)
+# Expenses class will be our object that holds information on each expense. The whole purpose of this class
+# is to keep all categories that belong under an expense into an instance. 
+class Expenses:
+    
+    # __init__ function is our overloaded constructor and serves the purpose of creating an object for the 
+    # expenses class. The whole focus here is to keep all information linked for future use. The time 
+    # complexity of this function runs in a time of T(n) = Θ(1) because we are only defining what an expense 
+    # consists of 
+    # @param month represents the month which the payment was made on
+    # @param day represents the day which the payment was made on
+    # @param category represents the category which the payment follows under
+    # @param payee represents the person/company/firm/etc. which the payment was paid to
+    # @param amount is the transaction amount that will be sent to our payee
+    def __init__(self, month, day, category, payee, amount):
+        self.month = month
+        self.day = day
+        self.category = category
+        self.payee = payee
+        self.amount = amount
+        
+        
+# tn = Tenate("Jacob",343)
+# ex = Expenses(1,2,"Insurance","All State",4840.0)
+# month = 1
+# tn.record_payment(month-1,1200)
+
+# print("AptNo Jan Feb Mar Apr May Jun Jul Aug Sep Oct Nov Dec")
+# tn.print_rental_income()
+# print(tn.Name)
+# print(ex.month,"/",ex.day, ex.category, ex.payee, ex.amount)
+
+# for i in tn.payment_list:
+#     print(i)
