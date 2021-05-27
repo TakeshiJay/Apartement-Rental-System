@@ -23,13 +23,14 @@ class Apartment:
     # @param tenate_list is the list of our objects 
     def __init__(self):
         self.tenate_list = []
+        self.monthly_expenses = []
     
     # add tenate function will store our new tenate into our apartment bookings. It is simple a 
     # append function for our program to store new objects into our apartment. This function runs in
     # a time complexity of T(n) = Θ(1) based off of our append to the back of our array
     # @param tenate is the new tenate that will be stored into our apartment
     def add_tenate(self,tenate):
-        if tenate not in tenate_list:
+        if tenate not in self.tenate_list:
             self.tenate_list.append(tenate)
     
     # remove tenate function is used to remove a tenate from our apartment list. The time complexity
@@ -77,7 +78,8 @@ class Tenate:
         print(self.Apart_No, *self.payment_list, sep=" ")
 
 # Expenses class will be our object that holds information on each expense. The whole purpose of this class
-# is to keep all categories that belong under an expense into an instance. 
+# is to keep all categories that belong under an expense into an instance. That will eventually be stored
+# in our Apartments monthly expenses list of items 
 class Expenses:
     
     # __init__ function is our overloaded constructor and serves the purpose of creating an object for the 
