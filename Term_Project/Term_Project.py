@@ -19,27 +19,27 @@ class Apartment:
     
     # init function is the default constructor(A.K.A the place where all of our Tenate objects are
     # stored) This constructor runs in a time complexity of T(n) = Θ(1) based on initialization of 
-    # our tenates list. 
+    # our tenants list. 
     # @param tenate_list is the list of our objects 
     def __init__(self):
-        self.tenate_list = []
+        self.tenant_list = []
         self.monthly_expenses = []
     
-    # add tenate function will store our new tenate into our apartment bookings. It is simple a 
+    # add tenant function will store our new tenate into our apartment bookings. It is simple a 
     # append function for our program to store new objects into our apartment. This function runs in
     # a time complexity of T(n) = Θ(1) based off of our append to the back of our array
     # @param tenate is the new tenate that will be stored into our apartment
-    def add_tenate(self,tenate):
+    def add_tenant(self, tenate):
         if tenate not in self.tenate_list:
-            self.tenate_list.append(tenate)
+            self.tenant_list.append(tenate)
     
     # remove tenate function is used to remove a tenate from our apartment list. The time complexity
     # of our remove function runs in T(n) = O(n) based off our iteration through the tenates list 
     # @param name is the name of the tenate we are bound to remove
-    def remove_tenate(self,name):
-        for i in self.tenate_list:
+    def remove_tenant(self, name):
+        for i in self.tenant_list:
             if i.Name == name:
-                self.tenate_list.remove(i)
+                self.tenant_list.remove(i)
     
     # add expenses function adds newly created expenses to our list of expenses paid and reports the 
     # specific day, month, category, payee, and amount from the LandLord(John Nguyen). The time 
@@ -51,7 +51,7 @@ class Apartment:
 
 # Tenate class will be used to help assist our apartment class which the objects
 # will be appended to our apartment list
-class Tenate:
+class Tenant:
     
     # init function is the overloaded constructor for our class
     # @param Name is the name of our Tenate
