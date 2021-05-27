@@ -1,6 +1,9 @@
 ########## Term Project ############
 #                                  #
 # @author Jacob Sunia              #
+# @author Sterling Engle           #
+# @author Matthew Chung            #
+# @author Larry Delgado            #
 # Due TBD at 23:59PST              #
 # Finished: TBD at TBD             #
 #----------------------------------#
