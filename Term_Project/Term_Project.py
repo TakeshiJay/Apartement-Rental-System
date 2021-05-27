@@ -35,6 +35,11 @@ class Apartment:
             if i.Name == name:
                 self.tenate_list.remove(i)
     
+    # add expenses function adds newly created expenses to our list of expenses paid and reports the 
+    # specific day, month, category, payee, and amount from the LandLord(John Nguyen). The time 
+    # complexity of this function runs in T(n) = Θ(1) based on the simple append to our list of expenses
+    # this list is not sorted and all based off of what is recorded at that moment in time.
+    # @param expense is the expense object that will be defined depending on our users input.
     def add_expenses(self,expense):
         self.monthly_expenses.append(expense)
 
