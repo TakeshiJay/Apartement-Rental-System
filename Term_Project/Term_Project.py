@@ -20,22 +20,23 @@ class Apartment:
     # init function is the default constructor(A.K.A the place where all of our Tenate objects are
     # stored) This constructor runs in a time complexity of T(n) = Θ(1) based on initialization of 
     # our tenants list. 
-    # @param tenate_list is the list of our objects 
+    # @param tenants_list is the list of our objects
+    # @param monthly_expenses is the list of expense objects 
     def __init__(self):
         self.tenant_list = []
         self.monthly_expenses = []
     
-    # add tenant function will store our new tenate into our apartment bookings. It is simple a 
+    # add tenant function will store our new tenant into our apartment bookings. It is simple a 
     # append function for our program to store new objects into our apartment. This function runs in
     # a time complexity of T(n) = Θ(1) based off of our append to the back of our array
-    # @param tenate is the new tenate that will be stored into our apartment
+    # @param tenant is the new tenate that will be stored into our apartment
     def add_tenant(self, tenant):
         if tenant not in self.tenate_list:
             self.tenant_list.append(tenant)
     
-    # remove tenate function is used to remove a tenate from our apartment list. The time complexity
-    # of our remove function runs in T(n) = O(n) based off our iteration through the tenates list 
-    # @param name is the name of the tenate we are bound to remove
+    # remove tenant function is used to remove a tenant from our apartment list. The time complexity
+    # of our remove function runs in T(n) = O(n) based off our iteration through the tenant list 
+    # @param name is the name of the tenant we are bound to remove
     def remove_tenant(self, name):
         for i in self.tenant_list:
             if i.Name == name:
@@ -49,12 +50,12 @@ class Apartment:
     def add_expenses(self,expense):
         self.monthly_expenses.append(expense)
 
-# Tenate class will be used to help assist our apartment class which the objects
+# tenant class will be used to help assist our apartment class which the objects
 # will be appended to our apartment list
 class Tenant:
     
     # init function is the overloaded constructor for our class
-    # @param Name is the name of our Tenate
+    # @param Name is the name of our tenant
     # @param Apart_No is an integer that will determine our apartment Number
     def __init__(self, Name, Apart_No):
         self.Name = Name
@@ -99,7 +100,7 @@ class Expenses:
         self.amount = amount
         
         
-# tn = Tenate("Jacob",343)
+# tn = tenant("Jacob",343)
 # ex = Expenses(1,2,"Insurance","All State",4840.0)
 # month = 1
 # tn.record_payment(month-1,1200)
