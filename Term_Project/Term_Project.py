@@ -31,7 +31,7 @@ class Apartment:
     # a time complexity of T(n) = Θ(1) based off of our append to the back of our array
     # @param tenant is the new tenate that will be stored into our apartment
     def add_tenant(self, tenant):
-        if tenant not in self.tenate_list:
+        if tenant not in self.tenant_list:
             self.tenant_list.append(tenant)
     
     # remove tenant function is used to remove a tenant from our apartment list. The time complexity
