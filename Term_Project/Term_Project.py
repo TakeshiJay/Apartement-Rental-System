@@ -98,6 +98,49 @@ class Expenses:
         self.category = category
         self.payee = payee
         self.amount = amount
+          
+# user class is a valid user that will be able to check out the apartment books program.
+class user:
+    
+    # __init__ function is our overloaded constructor that creates a basic login system for any new users
+    # @param user_name will be the user_name for our user object
+    # @param password will be the password for our login system where user_name must match with password
+    # @param apartment will be the apartment which our user will be assigned to but also taking into consideration
+    # that there could be multiple apartments in arbitrary examples
+    # @param role will control what functionalities the user is able to do in the program
+    def __init__(self, user_name, password, apartment, role):
+        self.user_name = user_name
+        self.password = password
+        self.apartment = apartment
+        self.role = role
+
+# valid_user class is basically a list of all users and identifying if a user is in our list of users
+# if a user gives incorrect information validation will flag that user does not exist or will prompt to 
+# create a new user
+class valid_users:
+    
+    # __init__ function is our default constructor for our valid users class. The whole purpose is to store all 
+    # valid user objects in a that are created. 
+    def __init__(self):
+        self.user_list = []
+    
+    # add_user class simply adds a new user to our user_list based on obeject reference point. If the user has
+    # been added to the list then no action will be taken
+    # @param user is the memory address of our user. 
+    def add_user(self, user):
+        if user not in self.user_list:
+            self.user_list.append(user)
+    
+    # validation function is a simple ensurance that the user enters the correct password(CASE SENSITIVE). If the 
+    # user enters the wrong password or invalid username the user will be either prompted to retry or create a new 
+    # user.
+    # @param user_name_in will be the user name checked at the login terminal 
+    # @param password_in will be the password checked at the login terminal
+    def validation(self, user_name_in, password_in):
+        for i in self.user_list:
+            if (i.user_name == user_name_in) and (i.password == pasword_in):
+                return True
+        return False
         
         
 # tn = tenant("Jacob",343)
