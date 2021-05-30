@@ -22,10 +22,12 @@ import argparse  # command-line parsing library
 
 
 # if logFile is defined also logs messages to the log file
-def printlog(s):
-    print(s)
+# @param s is the string to print [and log]
+# @param end is the Python end option, default is to print a newline
+def printlog(s, end='\n'):
+    print(s, end=end)
     if logFile is not None:
-        print(s, file=logFile)
+        print(s, file=logFile, end=end)
 
 
 # The apartment class stores every instance of a Tenate into our class. It is
@@ -95,11 +97,15 @@ class Tenant:
     # print_rental_income will be like a _toString_ function when we print out
     # the monthly payments for each person in the bookings. Its main priority
     # is to print each persons apartment number and rental income as follows.
-    # This function runs in a time complexity of T(n) = Θ(1) such that we are\
+    # This function runs in a time complexity of T(n) = Θ(1) such that we are
     # only printing out the payment list and apartment number
     def print_rental_income(self):
         # Prints as follows(Apartment Number-> print list separate by n spaces)
-        print(self.Apart_No, *self.payment_list, sep=" ")
+        # print(self.Apart_No, *self.payment_list, sep=" ")
+        printlog(f"{self.Apart_No:6d}", end="")  # no newline
+        for i in self.payment_list:
+            printlog(f"{i:5d}", end="")
+        printlog("")  # outputs the newline
 
 
 # Expenses class will be our object that holds information on each expense. The
@@ -207,18 +213,26 @@ def main():
     for i in apa.tenant_list:
         print(i.Name, i.Apart_No)
 
-    ex = Expenses(1, 2, "Insurance", "All State", 4840.0)
+    ex = Expenses(1, 2, "Insurance", "Allstate", 4840.0)
     month = 1
     tn.record_payment(month - 1, 1200)
 
-    print("Apt No  Jan  Feb  Mar  Apr  May  Jun  Jul  Aug  Sep  Oct  Nov  Dec")
+    months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep",
+              "Oct", "Nov", "Dec"]
+    printlog("Apt No  ", end="")
+    for i in range(12):
+        printlog(f"{months[i]:5s}", end="")
+    printlog("")
     tn.print_rental_income()
-    print(tn.Name)
-    print(ex.month, "/", ex.day, ex.category, ex.payee, ex.amount)
+    printlog("")
+    printlog(tn.Name)
 
-    for i in tn.payment_list:
-        print(i)
-
+    # print(ex.month, "/", ex.day, ex.category, ex.payee, ex.amount)
+    printlog(f"{months[ex.month]:3s} ", end="")
+    printlog(f"{ex.day:2d}: ", end="")
+    printlog(f"{ex.category} ", end="")
+    printlog(f"{ex.payee} ", end="")
+    printlog(f"${ex.amount:.2f}")
 
 if __name__ == "__main__":
     main()
