@@ -30,6 +30,41 @@ def printlog(s, end='\n'):
         print(s, file=logFile, end=end)
 
 
+# tenant provides an object type that contains an apartment number and tenant
+# name, and public methods used with this object.
+class Tenant:
+
+    # init function is the overloaded constructor for our class
+    # @param aptNum is the integer apartment number
+    # @param tenantName is the name of our tenant
+    def __init__(self, aptNum, tenantName):
+        self.aptNumber = aptNum
+        self.name = tenantName
+
+    def __del__(self):
+        return
+
+    def getTenant(self):
+        return self.aptNumber, self.name
+
+    def __lt__(self, other):
+        _, otherName = other.getTenant()
+        if self.name < otherName:
+            return True
+        else:
+            return False
+
+    def __eq__(self, other):
+        _, otherName = other.getTenant()
+        if self.name == otherName:
+            return True
+        else:
+            return False
+
+    def __str__(self):
+        return f"{self.aptNumber:5d} {self.name}"
+
+
 # The apartment class stores every instance of a Tenate into our class. It is
 # simply an array of Tenant objects in the apartment building
 class Apartment:
@@ -75,7 +110,7 @@ class Apartment:
 
 # tenant class assists our apartment class which the objects
 # will be appended to our apartment list
-class Tenant:
+class oldTenant:
 
     # init function is the overloaded constructor for our class
     # @param Name is the name of our tenant
@@ -202,12 +237,33 @@ def main():
              "Larry Delgado")
     printlog("")
 
+    t1 = Tenant(100, "Sterling Engle")
+    t1apt, t1name = t1.getTenant()
+    print(f"t1: apt = {t1apt}: name = {t1name}")
+    print(t1)
+    t2 = Tenant(101, "Jacob Sunia")
+    print(t2)
+    if t2 < t1:
+        print(t2, "sorts before", t1)
+    else:
+        print(t2, "sorts after", t1)
+    if t1 == t1:
+        print(t1, "equals", t1)
+    else:
+        print(t1, "is not equal to", t1)
+    if t1 == t2:
+        print(t1, "equals", t2)
+    else:
+        print(t1, "is not equal to", t2)
+
+    print("")
+    print("old test code:")
     apa = Apartment()
-    tn = Tenant("Jacob", 343)
+    tn = oldTenant("Jacob", 343)
     apa.add_tenant(tn)
-    tn1 = Tenant("Mike", 322)
+    tn1 = oldTenant("Mike", 322)
     apa.add_tenant(tn1)
-    tn2 = Tenant("George", 199)
+    tn2 = oldTenant("George", 199)
     apa.add_tenant(tn2)
 
     for i in apa.tenant_list:
