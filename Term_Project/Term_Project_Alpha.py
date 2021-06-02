@@ -1,6 +1,4 @@
-# -*- coding: utf-8 -*-
-############ THIS PROJECT IS NOT FINAL USED FOR CLASS MATERIAL AND WAS FOR TESTING PURPOSES ONLY ############
-############ ©Jacobsunia ©SterlingEngle                                                          ############ 
+# -*- coding: utf-8 -*- 
 """
 ########## Term Project ############
 #                                  #
