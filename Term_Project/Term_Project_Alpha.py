@@ -30,11 +30,12 @@ def printlog(s, end='\n'):
         print(s, file=logFile, end=end)
 
 
-# tenant provides an object type that contains an apartment number and tenant
+# Tenant provides an object type that contains an apartment number and tenant
 # name, and public methods used with this object.
+# [SE]
 class Tenant:
 
-    # init function is the overloaded constructor for our class
+    # __init__ function is the overloaded class constructor
     # @param aptNum is the integer apartment number
     # @param tenantName is the name of our tenant
     def __init__(self, aptNum, tenantName):
@@ -46,6 +47,9 @@ class Tenant:
 
     def getTenant(self):
         return self.aptNumber, self.name
+
+    def aptOccupied(self):
+        return self.name != ""
 
     def __lt__(self, other):
         _, otherName = other.getTenant()
@@ -63,6 +67,88 @@ class Tenant:
 
     def __str__(self):
         return f"{self.aptNumber:5d} {self.name}"
+
+
+# TThe TenantList class maintains a list of Tenant objects in private memory
+# and provides public methods for list manipulation and output.
+# [SE]
+class TenantList:
+
+    # init function is the overloaded class constructor
+    def __init__(self):
+        self.tenants = []
+
+    def __del__(self):
+        return
+
+    # returns index position of apartment number and/or tenant name in list,
+    # else None.
+    def __getTenantPos(self, aptNum=None, tenantName=None):
+        for pos in range(self.countTenants()):
+            aNum, tName = self.tenants[pos].getTenant()
+            if aptNum is not None and aptNum == aNum:
+                if tenantName is None or tenantName == tName:
+                    return pos
+            elif tenantName is not None and tName == tenantName:
+                if aptNum is None or aptNum == aNum:
+                    return pos
+        return None
+
+    # insertTenant adds newTenant name to provided apartment number
+    # if the apartment number is negative, it deletes abs(apartment number) if
+    # it exists, else None is returned.
+    def insertTenant(self, newTenant):
+        aNum, tName = newTenant.getTenant()
+        if aNum == 0:  # Apartment 0 invalid
+            return None
+        pos = self.__getTenantPos(abs(aNum))  # existing tenant in apt?
+        if pos is not None:
+            if aNum < 0:
+                self.tenants.pop(pos)  # delete apartment
+            else:
+                self.tenants[pos] = newTenant  # replace existing tenant
+        else:
+            if aNum < 0:
+                return None  # tried to delete non-existent apartment number
+            else:
+                self.tenants.append(newTenant)  # add new tenant
+        self.tenants.sort(key=lambda x: x.aptNumber)  # sort in place
+        return newTenant
+
+    # countTenants returns the number of Tenant objects in the tenants list
+    def countTenants(self):
+        return len(self.tenants)
+
+    # countAptsTenants returns the number of apartments and tenants in list
+    def countAptsTenants(self):
+        occupied = filter(lambda t: t.aptOccupied(), self.tenants)
+        # https://stackoverflow.com/questions/19182188/how-to-find-the-length-of-a-filter-object-in-python
+        return len(self.tenants), sum(1 for _ in occupied)
+
+    def getTenant(self, pos):
+        if pos < self.countTenants() and pos > -1:
+            return self.tenants[pos]
+        else:
+            return None
+
+    def findTenant(self, aptNum=None, tenantName=None):
+        pos = self.__getTenantPos(aptNum=aptNum, tenantName=tenantName)
+        if pos is not None:
+            return self.tenants[pos]
+        else:
+            return None
+
+    def __str__(self):
+        str = ""
+        for i in range(self.countTenants()):
+            str += self.getTenant(i).__str__() + "\n"
+        return str
+
+    def display(self):
+        print("Apt # Tenant Name")
+        print("----- -----------")
+        print(self)
+        return
 
 
 # The apartment class stores every instance of a Tenate into our class. It is
@@ -220,6 +306,80 @@ class valid_users:
         return False
 
 
+def TenantTenantListUnitTest():
+    print("*** Tenant class unit test cases: ***")
+    t42 = Tenant(42, "")  # empty apartment
+    t1 = Tenant(100, "Sterling Engle")
+    t1apt, t1name = t1.getTenant()
+    print(f"t1: Apt # = {t1apt}: Name = {t1name}")
+    print(t1)
+    t2 = Tenant(101, "Jacob Sunia")
+    print(t2)
+    if t2 < t1:
+        print(t2, "sorts by name before", t1)
+    else:
+        print(t2, "sorts by name after", t1)
+    if t1 == t1:
+        print(t1, "name equals", t1)
+    else:
+        print(t1, "name is not equal to", t1)
+    if t1 == t2:
+        print(t1, "name equals", t2)
+    else:
+        print(t1, "name is not equal to", t2)
+    t3old = Tenant(102, "Matthew McConaughey")
+    t3 = Tenant(102, "Matthew Chung")
+    t4 = Tenant(103, "Larry Delgado")
+    print("")
+
+    print("*** TenantList class unit test cases: ***")
+    tlist = TenantList()
+    print("empty TenantList object display:")
+    tlist.display()
+    aCnt, tCnt = tlist.countAptsTenants()
+    print(f"reported {aCnt} apartment(s) and {tCnt} tenant(s)")
+    print("now put Larry in Apt # 103")
+    tlist.insertTenant(t4)
+    print("call print(tlist) to test __str__()")
+    print(tlist)
+    aCnt, tCnt = tlist.countAptsTenants()
+    print(f"reported {aCnt} apartment(s) and {tCnt} tenant(s)")
+    tlist.insertTenant(t3old)
+    tlist.display()
+    tlist.insertTenant(t1)
+    tlist.insertTenant(t2)
+    tlist.display()
+    print("replace the actor with Matthew Chung in Apt # 102:")
+    tlist.insertTenant(t3)
+    tlist.display()
+    print("see who is in Apt # 102 now?")
+    t102 = tlist.findTenant(aptNum=102)
+    print(t102)
+    print("see what Apt # Sterling Engle is in?")
+    tSterling = tlist.findTenant(tenantName="Sterling Engle")
+    print(tSterling)
+    print("is Jacob Sunia in Apt # 102?")
+    print(tlist.findTenant(102, "Jacob Sunia"))
+    print("is Jacob Sunia in Apt # 101?")
+    print(tlist.findTenant(101, "Jacob Sunia"))
+    print("replace Jacob with himself in Apt # 101")
+    tlist.insertTenant(t2)
+    print("call print(tlist) again")
+    print(tlist)
+    print("add Apt # 42 with no tenant:")
+    tlist.insertTenant(t42)
+    tlist.display()
+    aCnt, tCnt = tlist.countAptsTenants()
+    print(f"reported {aCnt} apartment(s) and {tCnt} tenant(s)")
+    print("remove apt # 42 by using -42 apt #:")
+    tlist.insertTenant(Tenant(-42, ""))
+    tlist.display()
+    aCnt, tCnt = tlist.countAptsTenants()
+    print(f"reported {aCnt} apartment(s) and {tCnt} tenant(s)")
+    print("")
+    return
+
+
 def main():
     # argument parser
     ap = argparse.ArgumentParser()
@@ -232,31 +392,14 @@ def main():
     args = vars(ap.parse_args())
     global logFile  # output file for printlog(s)
     logFile = args['output']  # optional output file used by printlog(s)
-    printlog("Property Management System version 0.1")
-    printlog("Team 6: Jacob Sunia, Sterling Engle, Matthew Chung, and "
+    printlog("Property Management System version 0.11")
+    printlog("Team 6: Sterling Engle (lead), Jacob Sunia, Matthew Chung, and "
              "Larry Delgado")
     printlog("")
 
-    t1 = Tenant(100, "Sterling Engle")
-    t1apt, t1name = t1.getTenant()
-    print(f"t1: apt = {t1apt}: name = {t1name}")
-    print(t1)
-    t2 = Tenant(101, "Jacob Sunia")
-    print(t2)
-    if t2 < t1:
-        print(t2, "sorts before", t1)
-    else:
-        print(t2, "sorts after", t1)
-    if t1 == t1:
-        print(t1, "equals", t1)
-    else:
-        print(t1, "is not equal to", t1)
-    if t1 == t2:
-        print(t1, "equals", t2)
-    else:
-        print(t1, "is not equal to", t2)
+    global tlist
+    TenantTenantListUnitTest()
 
-    print("")
     print("old test code:")
     apa = Apartment()
     tn = oldTenant("Jacob", 343)
@@ -265,6 +408,7 @@ def main():
     apa.add_tenant(tn1)
     tn2 = oldTenant("George", 199)
     apa.add_tenant(tn2)
+    tn
 
     for i in apa.tenant_list:
         print(i.Name, i.Apart_No)
