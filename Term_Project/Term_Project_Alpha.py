@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*- 
+# -*- coding: utf-8 -*-
 """
 ########## Term Project ############
 #                                  #
@@ -39,34 +39,38 @@ class Tenant:
     # @param aptNum is the integer apartment number
     # @param tenantName is the name of our tenant
     def __init__(self, aptNum, tenantName):
-        self.aptNumber = aptNum
-        self.name = tenantName
+        self.__aptNumber = aptNum
+        self.__name = tenantName
 
     def __del__(self):
         return
 
+    def getApt(self):
+        return self.__aptNumber
+
     def getTenant(self):
-        return self.aptNumber, self.name
+        return self.__name
+
+    def getAptTenant(self):
+        return self.__aptNumber, self.__name
 
     def aptOccupied(self):
-        return self.name != ""
+        return self.__name != ""
 
     def __lt__(self, other):
-        _, otherName = other.getTenant()
-        if self.name < otherName:
+        if self.__name < other.getTenant():
             return True
         else:
             return False
 
     def __eq__(self, other):
-        _, otherName = other.getTenant()
-        if self.name == otherName:
+        if self.__name == other.getTenant():
             return True
         else:
             return False
 
     def __str__(self):
-        return f"{self.aptNumber:5d} {self.name}"
+        return f"{self.getApt():5d} {self.getTenant()}"
 
 
 # TThe TenantList class maintains a list of Tenant objects in private memory
@@ -76,7 +80,7 @@ class TenantList:
 
     # init function is the overloaded class constructor
     def __init__(self):
-        self.tenants = []
+        self.__tenants = []
 
     def __del__(self):
         return
@@ -85,7 +89,7 @@ class TenantList:
     # else None.
     def __getTenantPos(self, aptNum=None, tenantName=None):
         for pos in range(self.countTenants()):
-            aNum, tName = self.tenants[pos].getTenant()
+            aNum, tName = self.__tenants[pos].getAptTenant()
             if aptNum is not None and aptNum == aNum:
                 if tenantName is None or tenantName == tName:
                     return pos
@@ -98,43 +102,43 @@ class TenantList:
     # if the apartment number is negative, it deletes abs(apartment number) if
     # it exists, else None is returned.
     def insertTenant(self, newTenant):
-        aNum, tName = newTenant.getTenant()
+        aNum, tName = newTenant.getAptTenant()
         if aNum == 0:  # Apartment 0 invalid
             return None
         pos = self.__getTenantPos(abs(aNum))  # existing tenant in apt?
         if pos is not None:
             if aNum < 0:
-                self.tenants.pop(pos)  # delete apartment
+                self.__tenants.pop(pos)  # delete apartment
             else:
-                self.tenants[pos] = newTenant  # replace existing tenant
+                self.__tenants[pos] = newTenant  # replace existing tenant
         else:
             if aNum < 0:
                 return None  # tried to delete non-existent apartment number
             else:
-                self.tenants.append(newTenant)  # add new tenant
-        self.tenants.sort(key=lambda x: x.aptNumber)  # sort in place
+                self.__tenants.append(newTenant)  # add new tenant
+        self.__tenants.sort(key=lambda t: t.getApt())  # sort in place
         return newTenant
 
     # countTenants returns the number of Tenant objects in the tenants list
     def countTenants(self):
-        return len(self.tenants)
+        return len(self.__tenants)
 
     # countAptsTenants returns the number of apartments and tenants in list
     def countAptsTenants(self):
-        occupied = filter(lambda t: t.aptOccupied(), self.tenants)
+        occupied = filter(lambda t: t.aptOccupied(), self.__tenants)
         # https://stackoverflow.com/questions/19182188/how-to-find-the-length-of-a-filter-object-in-python
-        return len(self.tenants), sum(1 for _ in occupied)
+        return len(self.__tenants), sum(1 for _ in occupied)
 
     def getTenant(self, pos):
         if pos < self.countTenants() and pos > -1:
-            return self.tenants[pos]
+            return self.__tenants[pos]
         else:
             return None
 
     def findTenant(self, aptNum=None, tenantName=None):
         pos = self.__getTenantPos(aptNum=aptNum, tenantName=tenantName)
         if pos is not None:
-            return self.tenants[pos]
+            return self.__tenants[pos]
         else:
             return None
 
@@ -310,7 +314,7 @@ def TenantTenantListUnitTest():
     print("*** Tenant class unit test cases: ***")
     t42 = Tenant(42, "")  # empty apartment
     t1 = Tenant(100, "Sterling Engle")
-    t1apt, t1name = t1.getTenant()
+    t1apt, t1name = t1.getAptTenant()
     print(f"t1: Apt # = {t1apt}: Name = {t1name}")
     print(t1)
     t2 = Tenant(101, "Jacob Sunia")
@@ -433,6 +437,7 @@ def main():
     printlog(f"{ex.category} ", end="")
     printlog(f"{ex.payee} ", end="")
     printlog(f"${ex.amount:.2f}")
+
 
 if __name__ == "__main__":
     main()
