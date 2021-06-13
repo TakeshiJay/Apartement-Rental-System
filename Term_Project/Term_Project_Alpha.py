@@ -400,7 +400,25 @@ def main():
     printlog("Team 6: Sterling Engle (lead), Jacob Sunia, Matthew Chung, and "
              "Larry Delgado")
     printlog("")
-
+    '''
+    ######### MENU TEST ###############
+    option = 20
+    printlog("Log In")
+    input("user: ")
+    input("password: ")
+    if (login):
+        while(option != 0):
+            printlog("____Menu____")
+            printlog("1. Add Tenant")
+            printlog("2. Add Rent")
+            printlog("3. Add Expense")
+            printlog("4. View Tenant List")
+            printlog("5. View Rent Records")
+            printlog("6. View Expense Records")
+            printlog("7. View Annual Summary")
+            printlog("0. Log Out")
+            input(option)
+    '''
     global tlist
     TenantTenantListUnitTest()
 
