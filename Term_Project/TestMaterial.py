@@ -12,6 +12,8 @@ class login:
       self.__dic["Username"].append(user)
       self.__dic["Password"].append(passw)
       self.__dic["TenantList"].append(dict())
+      self.__dic["RentRecord"].append(dict())
+      self.__dic["Expenses"].append(dict())
   
   def get_dict(self):
     return(self.__dic)
@@ -51,22 +53,21 @@ class TIS: #Tenant input screen
     self.__tenant_name = __tenant_name
     self.__apt_Num = __apt_Num
 
+lg = login()
 
+x = input("Username:")
+y = input("Password:")
+lg.validate(x,y)
+a = lg.get_dict()
 
+if lg.flag == True:
+  new_ten = input("Enter Tenant Name:")
+  apt_No = input("Enter apartment no.:")
+b = lg.get_indx()
+a["TenantList"][b][new_ten] = apt_No
 
-# lg = login()
-
-# x = input("Username:")
-# y = input("Password:")
-# lg.validate(x,y)
-# a = lg.get_dict()
-
-# if lg.flag == True:
-#   new_ten = input("Enter Tenant Name")
-#   apt_No = input("Enter apartment no.:")
-# b = lg.get_indx()
-# a["TenantList"][new_ten].append(apt_No)
-
+print(a["TenantList"])
+lg.store_to_file()
 
 # if lg.flag == False:
 #   nu_u = input("Do you want to enter a new user?(Y/N):")
@@ -75,9 +76,9 @@ class TIS: #Tenant input screen
 #     y = input("Enter a New Password:")
 #     lg.nu_user(x,y)
 
-# lg.store_to_file()
 
-item = [{}]
-x = 515
-item[0].append(x)
-print(x)
+
+# item = [[{}]]
+# x = 515
+# item[0][0]["Alpha"] = x
+# print(item)
