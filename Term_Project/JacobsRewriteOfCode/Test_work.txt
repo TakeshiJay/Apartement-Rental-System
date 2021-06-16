@@ -1,0 +1,29 @@
+lg = login()
+
+x = input("Username:")
+y = input("Password:")
+lg.validate(x,y)
+a = lg.get_dict()
+
+if lg.flag == True:
+  new_ten = input("Enter Tenant Name:")
+  apt_No = input("Enter apartment no.:")
+b = lg.get_indx()
+a["TenantList"][b][new_ten] = apt_No
+
+print(a["TenantList"])
+lg.store_to_file()
+
+# if lg.flag == False:
+#   nu_u = input("Do you want to enter a new user?(Y/N):")
+#   if nu_u.lower() == 'y':
+#     x = input("Enter a New Username:")
+#     y = input("Enter a New Password:")
+#     lg.nu_user(x,y)
+
+
+
+# item = [[{}]]
+# x = 515
+# item[0][0]["Alpha"] = x
+# print(item)
