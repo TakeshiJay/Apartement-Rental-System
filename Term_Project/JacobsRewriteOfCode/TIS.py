@@ -1,5 +1,3 @@
-
-
 class TIS: #Tenant input screen
     def __init__(self, Name, AptNo):
         self.__Name = Name
