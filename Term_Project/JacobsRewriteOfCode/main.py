@@ -72,7 +72,8 @@ class UI:  #user interface
             expense = Expense()
             expense_List = Expense_List(
                 self.__expenses_List[self.__loged_user_idx])
-            expense_List.add_nu_expense(expense.get_month(),                                      expense.get_day(),
+            expense_List.add_nu_expense(expense.get_month(),                                      
+                                        expense.get_day(),
                                         expense.get_category(),
                                         expense.get_payee(),
                                         expense.get_amount())
