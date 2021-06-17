@@ -10,7 +10,7 @@ class User_List:
     def get_logged_idx(self):
         return(self.__loged_user_idx)
         
-    def nu_user(self, newU):
+    def add_user(self, newU):
         user, passw = newU
         if user in self.__user_list:
             print("Invalid: Username taken")

@@ -2,11 +2,12 @@ import tabulate
 
 
 class ExpenseRecords:
-    def __init__(self, expenseList):
+    #Initialize expenses with empty dictionary and updates as needed
+    def __init__(self, expenseRecord):
         self.__expenses = {}
-        self.__updatedList = expenseList
+        self.__updatedList = expenseRecord
 
-    def add_nu_expense(self, month, day, category, payee, amount):
+    def insertExp(self, month, day, category, payee, amount):
         self.__expenses['Month'] = month
         self.__expenses['Day'] = day
         self.__expenses['Category'] = category
@@ -14,7 +15,23 @@ class ExpenseRecords:
         self.__expenses['Amount'] = amount
         self.__updatedList.append(self.__expenses)
 
-    def print_expenses(self):
+    #If key is 'Amount' add the value of it to eTotal
+    def return_total_expenses(self):
+        eTotal = 0
+        for key in __updatedList:
+            if __updatedList.hasKey('Amount'):
+                eTotal += __updatedList[key]
+        return eTotal
+    #Print Expense Records
+    def displaySummary(self):
+        print("==== Expense Summary ====")
+        print(self)
+        #Tabulate
+        '''
         headers = self.__updatedList[0].keys()
         rows = [x.values() for x in self.__updatedList]
         print(tabulate.tabulate(rows, headers, tablefmt='rst'))
+        '''
+        #Print Expense Total Last
+        print("\nExpense Total: " + str(return_total_expenses()))
+        

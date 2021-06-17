@@ -6,7 +6,7 @@ from Expense import Expense
 from ExpenseRecords import ExpenseRecords
 from RentRow import RentRow
 from RentRecords import RentRecords
-from User_List Import User_List
+from User_List import User_List
 
 
 import json # importing json to write and read from our file
@@ -62,28 +62,47 @@ class UserInterface:  #user interface
             tenant = Tenant()
             ten_list = TenantList(self.__tenants_list[self.__loged_user_idx],
                                    self.__rent_records[self.__loged_user_idx])
-            ten_list.add_nu_tenant(tenant.get_Tenant(), tenant.get_Apt())
+            ten_list.inputTenant(tenant.getTenant(), tenant.getApt())
+            #idea: return or save ten_list in UI class for output
+        #    
         elif scanner_2 == 'r':
             rent_row = RentRow()
             rent_list = RentRecords(self.__rent_records, self.__loged_user_idx,
                                   self.__tenants_list[self.__loged_user_idx])
-            rent_list.add_nu_renPayment(rent_row.get_month(),
+            rent_list.insertRent(rent_row.get_month(),
                                         rent_row.get_amount(),
                                         rent_row.get_name())
+            self.rentRecords = rent_list
+        #
         elif scanner_2 == 'e':
             expense = Expense()
             expense_List = ExpenseRecords(
                 self.__expenses_List[self.__loged_user_idx])
-            expense_List.add_nu_expense(expense.get_month(),                                      
+            expense_List.insertExp(expense.get_month(),                                      
                                         expense.get_day(),
                                         expense.get_category(),
                                         expense.get_payee(),
                                         expense.get_amount())
-            expense_List.print_expenses()
+            expense_List.displaySummary()
+            # we should move this line to output_screen
         else:
             print('\nGoing Back to Main Menu...')
             time.sleep(0.5)
         self.store_to_file()
+
+    # Output Screen thing
+    def output_screen(self,scanner_2):
+        if scanner_2 == 't':
+            tenantList = tenantList(self.__tenants_list)
+            tenantList.display()
+        elif scanner_2 == 'r':
+            rentRecords = RentRecords(self.__rent_records)
+            rentRecords.display()
+        elif scanner_2 == 'e':
+            expenseRecords = ExpenseRecords(self.__expenses_List)
+            expenseRecords.displaySummary()
+        elif scanner_2 == 'a':
+            pass
 
     def logon_menu(self):
         user_list = User_List(self.__user_list, self.__password,
@@ -100,7 +119,7 @@ class UserInterface:  #user interface
                 self.__loged_user_idx = user_list.get_logged_idx()
             elif login == '2':
                 user = User.user_new()
-                user_list.nu_user(user.get_user())
+                user_list.add_user(user.get_user())
                 print('New User Logged In...\n')
                 self.store_to_file()
                 self.__loged_user_idx = user_list.get_logged_idx()
@@ -121,6 +140,14 @@ class UserInterface:  #user interface
             print('Enter \'t\' to add a New Tenant,')
             print('Enter \'r\' to record a rent payment,')
             print('Enter \'e\' to record an expense payment')
+        #For output_screen
+        if num == 4:
+            print('\nPlease Select One of the Following')
+            print('Enter \'t\' to display Tenant List,')
+            print('Enter \'r\' to display Rent Records,')
+            print('Enter \'e\' to display Expense Records')
+            print('Enter \'a\' to display Annual Summary')
+            
 
     def store_to_file(self):
         js = json.dumps(self.__dic)
