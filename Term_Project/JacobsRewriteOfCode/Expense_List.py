@@ -1,3 +1,5 @@
+import tabulate
+
 class Expense_List:
     def __init__(self, __Expense_List):
         self.__Expense_List = {}
@@ -12,5 +14,6 @@ class Expense_List:
         self.__updated_List.append(self.__Expense_List)
 
     def print_expenses(self):
-        for i in self.__updated_List:
-            print(i['Month'],'/',i['Day'],i['Category'],i['Payee'],i['Amount'])
+        headers = self.__updated_List[0].keys()
+        rows = [x.values() for x in self.__updated_List]
+        print(tabulate.tabulate(rows, headers, tablefmt='rst'))
