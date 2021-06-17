@@ -1,14 +1,15 @@
 from Tenant import Tenant
-from Tenant_List import Tenant_List
+from TenantList import TenantList
 from USER import User
 from Expense import Expense
-from Expense_List import Expense_List
-from Rent_Row import Rent_Row
-from Rent_List import Rent_List
+from ExpenseRecords import ExpenseRecords
+from RentRow import RentRow
+from RentRecords import RentRecords
 
 import json
 
-class UI: #user interface
+
+class UserInterface:  # user interface
     def __init__(self):
         f = open('login.json',)
         self.__dic = json.load(f)
@@ -17,7 +18,7 @@ class UI: #user interface
         self.__loged_user_idx = -1
         self.__tenants_list = self.__dic["TenantList"]
         self.__rent_records = self.__dic["RentRecord"]
-    
+
     def nu_user(self):
         newU = User.user_new()
         user, passw = newU.get_user()
@@ -37,7 +38,7 @@ class UI: #user interface
         user, passw = usrWB.get_user()
         self.validate_user(user, passw)
         if self.flag == True:
-            print('Welcome Back',user)
+            print('Welcome Back', user)
 
     def get_indx(self):
         return(self.__loged_user_idx)
@@ -45,7 +46,7 @@ class UI: #user interface
     def validate_user(self, user, passw):
         if user not in self.__dic["Username"]:
             print("Invalid Username")
-            return 0 
+            return 0
         for i in self.__dic["Username"]:
             if i == user:
                 idx = self.__dic["Username"].index(i)
@@ -55,14 +56,14 @@ class UI: #user interface
                     self.flag = True
                     self.__loged_user_idx = idx
                     print("User/Password successful")
-                    return 0 
+                    return 0
                 else:
                     print("Invalid Password")
                     return 0
-    
+
     def store_to_file(self):
         js = json.dumps(self.__dic)
-        f = open("login.json","w")
+        f = open("login.json", "w")
         f.write(js)
         f.close()
 
@@ -85,14 +86,14 @@ class UI: #user interface
         print('Welcome to the Apartment Complex System')
         print('Please Enter one of the following...\n\n')
         self.logon_menu()
-  
+
         scanner = ''
         while(scanner != 'q' and self.flag == True):
             print('\nEnter \'i\' to input data,')
             print('Enter \'d\' to display data,')
             print('Enter \'q\' to quit the program')
             scanner = input('Enter Value:')
-            
+
             if scanner.lower() == 'i':
                 print('\nPlease Select One of the Following')
                 print('Enter \'t\' to add a New Tenant,')
@@ -101,12 +102,17 @@ class UI: #user interface
                 scanner_2 = input('Enter Value:')
                 if scanner_2 == 't':
                     tenant = Tenant()
-                    ten_list = Tenant_List(self.__tenants_list[self.__loged_user_idx], self.__rent_records[self.__loged_user_idx])
-                    ten_list.add_nu_tenant(tenant.get_Tenant(),tenant.get_Apt())
-                    
+                    ten_list = TenantList(self.__tenants_list[self.__loged_user_idx], 
+                                          self.__rent_records[self.__loged_user_idx])
+                    ten_list.insertTenant(tenant.getTenant(), tenant.getApt())
                     self.store_to_file()
             else:
                 scanner = 'q'
 
-ui = UI()
-ui.main()
+
+def main():
+    ui = UserInterface()
+    ui.main()
+
+if __name__ == "__main__":
+    main()

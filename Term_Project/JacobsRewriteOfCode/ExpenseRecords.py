@@ -1,0 +1,12 @@
+class ExpenseRecords:
+    def __init__(self, expenseList):
+        self.__expenses = {}
+        self.__updatedList = expenseList
+
+    def add_nu_expense(self, month, day, category, payee, amount):
+        self.__expenses['Month'] = month
+        self.__expenses['Day'] = day
+        self.__expenses['Category'] = category
+        self.__expenses['Payee'] = payee
+        self.__expenses['Amount'] = amount
+        self.__updatedList.append(self.__expenses)

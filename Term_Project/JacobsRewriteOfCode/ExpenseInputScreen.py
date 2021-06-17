@@ -1,4 +1,4 @@
-class EIS: #Expense input screen
+class ExpenseInputScreen: #Expense input screen
     def __init__(self, month, day, category, payee, amount):
         self.__month = month
         self.__day = day
@@ -6,12 +6,12 @@ class EIS: #Expense input screen
         self.__payee = payee
         self.__amount = amount
     
-    def get_expense(self):
+    def getExpense(self):
         return(self.__month, self.__day, self.__category,
               self.__payee, self.__amount)
     
     @classmethod
-    def user_inp(cls):
+    def inputExpense(cls):
         return cls(
             int(input("Month No.:")),
             int(input("Day No.:")),
