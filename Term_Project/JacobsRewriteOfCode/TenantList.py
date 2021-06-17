@@ -43,6 +43,7 @@ class TenantList:
             print('Apartment Taken, User Not Added')
 
 
+
 tenantListPath = "TenantList.json"  # tenant list JSON file path
 
 
