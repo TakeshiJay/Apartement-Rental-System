@@ -7,39 +7,36 @@
 # @author Matthew Chung            #
 # @author Larry Delgado            #
 #                                  #
-# Due TBD at 23:59PST              #
+# Due TBD at 23:59 PDT             #
 # Finished: TBD at TBD             #
 #----------------------------------#
 # CSULB CECS 343 Intro to S/W Engr #
-# Professor Phuoug Nguyen          #
+# Professor Phuong Nguyen          #
 ####################################
 """
 
-from TenantInputScreen import TenantInputScreen
+# from TenantInputScreen import TenantInputScreen
 
 """
-Tenant class does not prompt to input a new tenant - SJE
-code here temp. for historical reasons will be removed before 0.1 release
-"""
-
+SJE: Tenant class may not prompt to input a new tenant.
+That would violate the object hierarchy since Tenant is at the lowest level.
+code here temp. for historical reasons will be removed before 0.2 release
 
 class Tenant:
     def __init__(self):
         tis = TenantInputScreen.inputTenant()
-        self.__Apt_No, self.__Name = tis.getTenant()   
-    
+        self.__Apt_No, self.__Name = tis.getTenant()
     def getApt(self):
         return self.__Apt_No
-    
+
     def getTenant(self):
         return self.__Name
+"""
 
 
-# TODO
-# Tenant provides an object type that contains an apartment number and tenant
-# name, and public methods used with this object.
-# [SE]
-class SterlingTenant:
+# Tenant provides an object type that stores an apartment number and tenant
+# name in private memory, and public methods used with this object.
+class Tenant:
 
     # __init__ function is the overloaded class constructor
     # @param aptNum is the integer apartment number
