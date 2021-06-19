@@ -7,23 +7,24 @@
 # @author Matthew Chung            #
 # @author Larry Delgado            #
 #                                  #
-# Due TBD at 23:59PST              #
+# Due TBD at 23:59 PDT             #
 # Finished: TBD at TBD             #
 #----------------------------------#
 # CSULB CECS 343 Intro to S/W Engr #
-# Professor Phuoug Nguyen          #
+# Professor Phuong Nguyen          #
 ####################################
 """
 
-# JavaScript Object Notation, is an open standard file format and data\
+# JavaScript Object Notation, is an open standard file format and data
 # interchange format that uses human-readable text to store and transmit data
 # objects consisting of attribute–value pairs and arrays
 # (or other serializable values)
-import json
-from os import path
+# import json
+# from os import path
 import Tenant
 
 
+"""
 #
 # This code was already written and is here for historical reasons - SJE
 #
@@ -41,48 +42,20 @@ class TenantList:
             self.__rent_list.append(self.__rental_list)
         else:
             print('Apartment Taken, User Not Added')
+"""
 
-
-
-tenantListPath = "TenantList.json"  # tenant list JSON file path
+# tenantListPath = "TenantList.json"  # tenant list JSON file path
 
 
 # The TenantList class maintains a list of Tenant objects in private memory
 # and provides public methods for list manipulation and output.
 # [SE]
-class SterlingTenantList:
+class TenantList:
 
     # __init__(self) function is the overloaded class constructor
     # it loads any saved tenant list JSON from "TenantList.json"
-    def __init__(self):
-        self.__tenants = []
-        if path.exists(tenantListPath):  # with closes file object
-            with open(tenantListPath, 'r') as tenantListFileObject:
-                data = tenantListFileObject.read()
-                self.__tenants = json.loads(data,
-                                           object_hook=self.__decodeTenantList)
-
-    # __del__(self) is overloaded class destructor
-    # it dumps self.__tenants into a new "TenantList.json" JSON file
-    def __del__(self):
-        print(self.__tenants)
-        with open(tenantListPath, 'w') as tenantListFileObject:
-            json.dumps(self.__tenants, tenantListFileObject,
-                       default=self.__encodeTenant)
-        return
-
-    def __decodeTenant(dct):
-        if "__Tenant__" in dct:
-            return Tenant(dct["aptNum"], dct["tenantName"])
-        return dct
-
-    def __encodeTenant(t):
-        if isinstance(t, Tenant):
-            return(t.aptNum, t.tenantName)
-        else:
-            typeName = t.__class__.__name__
-            raise TypeError(f"Object of type '{typeName} "
-                            "is not JSON serializable")
+    def __init__(self, tenantList):
+        self.__tenants = tenantList
 
     # returns index position of apartment number and/or tenant name in list,
     # else None.
