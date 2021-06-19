@@ -39,14 +39,16 @@ class LoginInputScreen:
         self.__username = input('Enter your new username: ')
         if self.__username == "":
             return None
-        # TODO Jacob: please check here if the username is used already
+        # TODO Jacob: please check here if the username is taken
+        # TODO Jacob: if so, loop and reprompt username.
         while True:
             self.__password = input('Enter your new password: ')
             if self.__password == "":
                 return None
             self.__confirmPassword = input('Please re-enter your password: ')
-            if self.__password == self.__confirmPassword:
-                if self.__confirmPassword == "":
-                    return None
-                else:
-                    return(self.getUserPassword())
+            if self.__confirmPassword == "":
+                return None
+            if self.__password != self.__confirmPassword:
+                print("Please re-enter the same password to confirm.")
+            else:
+                return(self.getUserPassword())

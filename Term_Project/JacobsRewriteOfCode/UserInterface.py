@@ -24,6 +24,7 @@ from ExpenseRecords import ExpenseRecords
 from RentRow import RentRow
 from RentRecords import RentRecords
 from UserList import UserList
+from AnnualReport import AnnualReport
 
 
 # JavaScript Object Notation, is an open standard file format and data
@@ -61,8 +62,12 @@ class UserInterface:  # user interface
 
     def loginMainMenu(self):
         self.print_menus(1)
-        if self.logon_menu() is False:
-            return False
+        logonStatus = 0  # 0 means not logged in, 1 = logged in, 2 = quit
+        while logonStatus == 0:
+            logonStatus = self.logon_menu()
+            if logonStatus == 2:
+                return False  # quit
+
         self.__tenantList = \
             TenantList(self.__tenants_list[self.__loged_user_idx])
         self.__tenantScreen = TenantInputScreen(self.__tenantList)
@@ -160,15 +165,19 @@ class UserInterface:  # user interface
                 lis = LoginInputScreen()
                 user = lis.inputNewUser()
                 if user is not None:
-                    userList.add_user(user)
-                    print('New user logged In...\n')
-                    self.store_to_file()
-                    self.__loged_user_idx = userList.get_logged_idx()
+                    if userList.add_user(user) is None:
+                        print(f'There is already a username "{user[0]}".')
+                        return 0  # not logged in
+                    else:
+                        print(f'New user "{user[0]}" logged in...\n')
+                        self.store_to_file()
+                        self.__loged_user_idx = userList.get_logged_idx()
+                        return 1  # logged in
             elif login.lower() == 'q':  # quit program
-                return False
+                return 2  # quit program
             else:
                 print(f'"{login}" is an invalid entry, please try again.')
-        return True
+        return 1  # logged-in
 
     def print_menus(self, num):
         if num == 1:
