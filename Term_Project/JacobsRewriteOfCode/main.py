@@ -17,7 +17,6 @@
 
 
 from LoginInputScreen import LoginInputScreen
-# from Tenant import Tenant
 from TenantList import TenantList
 from TenantInputScreen import TenantInputScreen
 from Expense import Expense
@@ -32,7 +31,7 @@ from UserList import UserList
 # objects consisting of attribute–value pairs and arrays
 # (or other serializable values)
 import json  # json used to read and write from persistent storage data file
-import time  # time used to delay some processes that we need to slow down
+# import time  # time used to delay some processes that we need to slow down
 
 
 # UserInterface class conains the login and menu process
@@ -58,11 +57,7 @@ class UserInterface:  # user interface
         self.__expenses_List = self.__dic["Expenses"]
         self.__loged_user_idx = -1
         self.__tenants_list = self.__dic["TenantList"]
-        # TODO
-        # print("TenantList:")
-        # print(self.__tenants_list)
         self.__rent_records = self.__dic["RentRecord"]
-        # self.__tenantScreen = TenantInputScreen(self.__tenants_list)
 
     def loginMainMenu(self):
         self.print_menus(1)
@@ -73,24 +68,20 @@ class UserInterface:  # user interface
 
         scanner = ''
         while (scanner != 'q'):
-            # self.print_menus(2)
-            # scanner = input('Enter Value: ')
             scanner = input("Enter 'i' to Input data, 'd' to Display data, "
                             "or q to Quit: ")
             if scanner.lower() == 'i':
                 self.print_menus(3)
-                # scanner_2 = input('Enter Value: ')
                 scanner_2 = input('      press [Enter] to return '
                                   'to main menu: ')
                 self.inputScreen(scanner_2)
             elif scanner.lower() == 'd':
                 self.print_menus(4)
-                # scanner_2 = input('Enter Value: ')3
                 scanner_2 = input('      press [Enter] to return '
                                   'to main menu: ')
                 self.output_screen(scanner_2)
-        print('Thank you For using the Apartment Management System. '
-              'See you soon!')
+        print('Thank you for using the Apartment Management System by Team 6.')
+        print('See you again soon!')
 
     def inputScreen(self, scanner_2):
         if scanner_2 == 't':
@@ -123,14 +114,11 @@ class UserInterface:  # user interface
                                    expense.get_amount())
             expense_List.displaySummary()
             # we should move this line to output_screen
-        # else:
-            # print('\n` Back to Main Menu...')
-            # time.sleep(0.5)
-        # TODO remove next line when TenantList converted to what is used outside
+        # TODO remove next line when TenantList converted and handled in here
         if scanner_2 != 't':
             self.store_to_file()
 
-    # Output Screen thing
+    # Output Screen
     def output_screen(self, scanner_2):
         if scanner_2 == 't':
             tenantList = TenantList(self.__tenants_list)
@@ -151,7 +139,7 @@ class UserInterface:  # user interface
                             self.__expenses_List)
 
         while userList.flag is False:
-            login = input('Enter 1 to login, or 2 to create a new user: ')
+            login = input('Enter 1 to login or 2 to create new user: ')
             if login == '1':  # user login
                 lis = LoginInputScreen()
                 user = lis.inputUser()
@@ -163,7 +151,7 @@ class UserInterface:  # user interface
                 user = lis.inputNewUser()
                 if user is not None:
                     userList.add_user(user)
-                    print('New User Logged In...\n')
+                    print('New user logged In...\n')
                     self.store_to_file()
                     self.__loged_user_idx = userList.get_logged_idx()
             else:
@@ -171,28 +159,18 @@ class UserInterface:  # user interface
 
     def print_menus(self, num):
         if num == 1:
-            print('Welcome to the Apartment Management System v0.1')
-            print('Please select one of the following options:\n\n')
-        elif num == 2:
-            print("\nEnter 'i' to Input data, 'd' to Display data, or ",
-                  end="")
-            # print('\nEnter \'i\' to Input data,')
-            # print('      \'d\' to Display data, or', end='')  # no newline
-            # print('      \'q\' to Quit the program: ')
-        elif num == 3:  # add or replace tenant done in TenantInputScreen
-            # print('\nPlease Select One of the Following:')
-            print('\nEnter \'t\' to add or replace a Tenant,')
-            print('      \'r\' to record a Rent payment,')
-            print('      \'e\' to record an Expense payment, or', end='')
-            # print('      press [Enter] to return to the main menu.')
+            print('Welcome to the Apartment Management System v0.2')
+            print('Please select one of the following login options:')
+        elif num == 3:
+            print("\nEnter 't' to add or replace a Tenant,")
+            print("      'r' to record a Rent payment,")
+            print("      'e' to record an Expense payment, or", end='')
         # For output_screen
         elif num == 4:
-            # print('\nPlease Select One of the Following:')
-            print('Enter \'t\' to display Tenant list,')
-            print('      \'r\' to display Rent records,')
-            print('      \'e\' to display Expense records,')
-            print('      \'a\' to display Annual summary, or', end='')
-            # print('      press [Enter] to return to the main menu.')
+            print("\nEnter 't' to display Tenant list,")
+            print("      'r' to display Rent records,")
+            print("      'e' to display Expense records,")
+            print("      'a' to display Annual summary, or", end='')
         else:
             print(f"Menu number {num} not supported.")
 

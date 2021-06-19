@@ -2,8 +2,8 @@
 """
 ########## Term Project ############
 #                                  #
-# @author Jacob Sunia              #
 # @author Sterling Engle           #
+# @author Jacob Sunia              #
 # @author Matthew Chung            #
 # @author Larry Delgado            #
 #                                  #
@@ -15,45 +15,12 @@
 ####################################
 """
 
-# JavaScript Object Notation, is an open standard file format and data
-# interchange format that uses human-readable text to store and transmit data
-# objects consisting of attribute–value pairs and arrays
-# (or other serializable values)
-# import json
-# from os import path
-import Tenant
-
-
-"""
-#
-# This code was already written and is here for historical reasons - SJE
-#
-class TenantList:
-
-    def __init__(self, __tenant_list, __rent_list):
-        self.__tenant_list = __tenant_list
-        self.__tenant_pos = -1
-        self.__rental_list = [0] * 12
-        self.__rent_list = __rent_list
-
-    def insertTenant(self, name, Apa_no):
-        if Apa_no not in self.__tenant_list:
-            self.__tenant_list[Apa_no] = name
-            self.__rent_list.append(self.__rental_list)
-        else:
-            print('Apartment Taken, User Not Added')
-"""
-
-# tenantListPath = "TenantList.json"  # tenant list JSON file path
-
 
 # The TenantList class maintains a list of Tenant objects in private memory
 # and provides public methods for list manipulation and output.
-# [SE]
 class TenantList:
 
     # __init__(self) function is the overloaded class constructor
-    # it loads any saved tenant list JSON from "TenantList.json"
     def __init__(self, tenantList):
         self.__tenants = tenantList
 

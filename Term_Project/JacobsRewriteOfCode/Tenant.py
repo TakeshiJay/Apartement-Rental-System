@@ -2,8 +2,8 @@
 """
 ########## Term Project ############
 #                                  #
-# @author Jacob Sunia              #
 # @author Sterling Engle           #
+# @author Jacob Sunia              #
 # @author Matthew Chung            #
 # @author Larry Delgado            #
 #                                  #
@@ -13,24 +13,6 @@
 # CSULB CECS 343 Intro to S/W Engr #
 # Professor Phuong Nguyen          #
 ####################################
-"""
-
-# from TenantInputScreen import TenantInputScreen
-
-"""
-SJE: Tenant class may not prompt to input a new tenant.
-That would violate the object hierarchy since Tenant is at the lowest level.
-code here temp. for historical reasons will be removed before 0.2 release
-
-class Tenant:
-    def __init__(self):
-        tis = TenantInputScreen.inputTenant()
-        self.__Apt_No, self.__Name = tis.getTenant()
-    def getApt(self):
-        return self.__Apt_No
-
-    def getTenant(self):
-        return self.__Name
 """
 
 
