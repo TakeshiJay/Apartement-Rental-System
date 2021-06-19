@@ -36,7 +36,7 @@ class ExpenseRecords:
     def return_total_expenses(self):
         eTotal = 0
         for key in self.__updatedList:
-            if self.__updatedList.hasKey('Amount'):
+            if key is 'Amount':
                 eTotal += self.__updatedList[key]
         return eTotal
 

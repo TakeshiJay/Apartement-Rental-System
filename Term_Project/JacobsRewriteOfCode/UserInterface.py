@@ -137,7 +137,9 @@ class UserInterface:  # user interface
             expenseRecords = ExpenseRecords(self.__expenses_List)
             expenseRecords.displaySummary()
         elif scanner_2 == 'a':
-            pass
+            annualReport = AnnualReport()
+            annualReport.calc_netProdit()
+            annualReport.displayAnnualSummary()
 
     def logon_menu(self):
         user = LoginInputScreen()
