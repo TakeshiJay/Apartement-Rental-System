@@ -70,12 +70,14 @@ class TenantInputScreen:  # Tenant input screen
         if self.__aptNum > 0:
             if self.__tenantName != "":
                 print(f"Apartment {tenant.getApt()} assigned "
-                      f"to {tenant.getTenant()}")
+                      f"to {tenant.getTenant()}.")
+            elif existing is None:
+                print(f"Apartment {tenant.getApt()} already vacant.")
             else:
                 print(f"Apartment {tenant.getApt()} vacated.")
         elif existing is not None:
-            print(f"Apartment {-self.__aptNum} removed from building")
+            print(f"Apartment {-self.__aptNum} removed from building.")
         else:
             print(f"Apartment {-self.__aptNum} not found -"
-                  " not removed from building")
+                  " not removed from building.")
         return self.__existingTenants

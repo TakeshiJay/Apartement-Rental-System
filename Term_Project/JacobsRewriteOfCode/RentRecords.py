@@ -2,9 +2,9 @@
 """
 ########## Term Project ############
 #                                  #
-# @author Jacob Sunia              #
-# @author Sterling Engle           #
 # @author Matthew Chung            #
+# @author Sterling Engle           #
+# @author Jacob Sunia              #
 # @author Larry Delgado            #
 #                                  #
 # Due TBD at 23:59 PDT             #
@@ -18,7 +18,7 @@
 
 class RentRecords:
     def __init__(self, __rentRecord):
-        self.__rows = __rentRecord
+        self.__rows = __rentRecord  # RentRecords dictionary
 
     def insertRent(self, month, amount):
         if month > 0 and month < 13:
@@ -34,15 +34,22 @@ class RentRecords:
 
     # Get Rent Total
     def getSumOfRents(self):
-        rTotal = 0
-        for key in self.__RentRecord:
-            rTotal += self.__rentRecord[key]
+        rTotal = 0.00
+        # print(self.__rows)
+        """
+        for key in self.__rows:
+            print(key, '->', self.__rows[key])
+            rTotal += self.__rows[key]
+        """
+        for user in self.__rows:
+            for name in user:
+                for month in name:
+                    rTotal += month
         return rTotal
 
     # Print Rent Record
     def display(self):
-        print("==== Rent Summary =====")
-        print(self)
+        print("\n==== Rent Summary =====")
         # Tabulate
         '''
         headers = self.__Rent_List.keys()
@@ -50,4 +57,4 @@ class RentRecords:
         print(tabulate.tabulate(rows, headers, tablefmt='rst'))
         '''
         # Print Rent Total Last
-        print("\nRent Total: " + str(self.getSumOfRents()))
+        print(f"\nRent Total: ${self.getSumOfRents():.2f}")

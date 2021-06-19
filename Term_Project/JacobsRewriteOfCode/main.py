@@ -57,7 +57,7 @@ class UserInterface:  # user interface
         self.__expenses_List = self.__dic["Expenses"]
         self.__loged_user_idx = -1
         self.__tenants_list = self.__dic["TenantList"]
-        self.__rent_records = self.__dic["RentRecord"]
+        self.__rent_records = self.__dic["RentRecords"]
 
     def loginMainMenu(self):
         self.print_menus(1)
