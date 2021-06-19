@@ -61,27 +61,34 @@ class UserInterface:  # user interface
 
     def loginMainMenu(self):
         self.print_menus(1)
-        self.logon_menu()
+        if self.logon_menu() is False:
+            return False
         self.__tenantList = \
             TenantList(self.__tenants_list[self.__loged_user_idx])
         self.__tenantScreen = TenantInputScreen(self.__tenantList)
 
         scanner = ''
-        while (scanner != 'q'):
+        while (scanner != 'l'):
             scanner = input("Enter 'i' to Input data, 'd' to Display data, "
-                            "or q to Quit: ")
+                            "or 'l' to Logout: ")
             if scanner.lower() == 'i':
                 self.print_menus(3)
-                scanner_2 = input('      press [Enter] to return '
-                                  'to main menu: ')
+                scanner_2 = input("      press [Enter] to return "
+                                  "to main menu: ")
                 self.inputScreen(scanner_2)
             elif scanner.lower() == 'd':
                 self.print_menus(4)
-                scanner_2 = input('      press [Enter] to return '
-                                  'to main menu: ')
+                scanner_2 = input("      press [Enter] to return "
+                                  "to main menu: ")
                 self.output_screen(scanner_2)
-        print('Thank you for using the Apartment Management System by Team 6.')
-        print('See you again soon!')
+            elif scanner.lower() == 'l':
+                print("Thank you for using the Apartment Management System "
+                      "by Team 6.")
+                print("See you again soon!\n")
+                return True
+            else:
+                print(f'"{scanner}" is an invalid option please try again.')
+        return True
 
     def inputScreen(self, scanner_2):
         if scanner_2 == 't':
@@ -139,7 +146,8 @@ class UserInterface:  # user interface
                             self.__expenses_List)
 
         while userList.flag is False:
-            login = input('Enter 1 to login or 2 to create new user: ')
+            login = input("Enter 1 to login, 2 to create new user, "
+                          "or 'q' to Quit: ")
             if login == '1':  # user login
                 lis = LoginInputScreen()
                 user = lis.inputUser()
@@ -154,12 +162,15 @@ class UserInterface:  # user interface
                     print('New user logged In...\n')
                     self.store_to_file()
                     self.__loged_user_idx = userList.get_logged_idx()
+            elif login.lower() == 'q':  # quit program
+                return False
             else:
-                print('Invalid entry, please try again...\n')
+                print(f'"{login}" is an invalid entry, please try again.')
+        return True
 
     def print_menus(self, num):
         if num == 1:
-            print('Welcome to the Apartment Management System v0.2')
+            print('Welcome to the Apartment Management System v0.3')
             print('Please select one of the following login options:')
         elif num == 3:
             print("\nEnter 't' to add or replace a Tenant,")
@@ -179,12 +190,3 @@ class UserInterface:  # user interface
         f = open("login.json", "w")
         f.write(js)
         f.close()
-
-
-def main():
-    ui = UserInterface()
-    ui.loginMainMenu()
-
-
-if __name__ == "__main__":
-    main()
