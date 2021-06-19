@@ -2,8 +2,6 @@ import tabulate
 import ExpenseRecords
 import RentRecords
 
-#Class to be written by Larry
-
 #Initialize class records from previous into 1 Annual Report instance
 class AnnualReport:
     def __init__(self, __expenseRecords, __rentRecords):
