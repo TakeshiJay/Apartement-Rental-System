@@ -37,8 +37,9 @@ class LoginInputScreen:
         self.__username = input('Enter your new username: ')
         if self.__username == "":
             return None
-        # TODO Jacob: please check here if the username is taken
-        # TODO Jacob: if so, loop and reprompt username.
+        if self.__username in self.__user_list:
+            print('Username is taken, please try again...\n')
+            self.inputNewUser() # recursively loop if the username is taken
         while True:
             self.__password = input('Enter your new password: ')
             if self.__password == "":
