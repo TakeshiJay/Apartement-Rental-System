@@ -147,7 +147,7 @@ class UserInterface:  # user interface
             annualReport.displayAnnualSummary()
 
     def logon_menu(self):
-        user = LoginInputScreen(self.__UserList)
+        lis = LoginInputScreen(self.__UserList)
         userList = UserList(self.__UserList, self.__password,
                             self.__tenants_list, self.__rent_records,
                             self.__expenses_List)
@@ -156,13 +156,13 @@ class UserInterface:  # user interface
             login = input("Enter 1 to login, 2 to create new user, "
                           "or 'q' to Quit: ")
             if login == '1':  # user login
-                lis = LoginInputScreen()
+                # lis = LoginInputScreen(self.__UserList)
                 user = lis.inputUser()
                 if user is not None:
                     userList.return_user(user)
                     self.__loged_user_idx = userList.get_logged_idx()
             elif login == '2':  # create new user/password and login
-                lis = LoginInputScreen(self.__UserList)
+                # lis = LoginInputScreen(self.__UserList)
                 user = lis.inputNewUser()
                 if user is not None:
                     if userList.add_user(user) is None:

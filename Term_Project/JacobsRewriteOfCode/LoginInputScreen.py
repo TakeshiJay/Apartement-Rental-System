@@ -34,21 +34,29 @@ class LoginInputScreen:
         else:
             return(self.getUserPassword())
 
+    # inputNewUser prompts for a new username and password, verifying the
+    # password. If the username is taken, it re-prompts for a unique one.
+    # Return: self.getUserPassword() upon success, else None if user leaves
+    #         a field blank by just pressing [enter].
     def inputNewUser(self):
-        self.__username = input('Enter your new username: ')
-        if self.__username == "":
-            return None
-        if self.__username in self.__user_list:
-            print('Username is taken, please try again...\n')
-            self.inputNewUser() # recursively loop if the username is taken
         while True:
-            self.__password = input('Enter your new password: ')
-            if self.__password == "":
+            self.__username = input('Enter your new username: ')
+            if self.__username == "":
                 return None
-            self.__confirmPassword = input('Please re-enter your password: ')
-            if self.__confirmPassword == "":
-                return None
-            if self.__password != self.__confirmPassword:
-                print("Please re-enter the same password to confirm.")
-            else:
-                return(self.getUserPassword())
+            if self.__username in self.__user_list:
+                print(f'Username "{self.__username}" is taken, '
+                      'please try again...')
+                self.__username = ""
+                continue
+            while True:
+                self.__password = input('Enter your new password: ')
+                if self.__password == "":
+                    return None
+                self.__confirmPassword = input("Please re-enter "
+                                               "your password: ")
+                if self.__confirmPassword == "":
+                    return None
+                if self.__password != self.__confirmPassword:
+                    print("Please re-enter the same password to confirm.")
+                else:
+                    return(self.getUserPassword())
