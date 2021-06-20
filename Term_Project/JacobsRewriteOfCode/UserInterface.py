@@ -1,3 +1,4 @@
+  
 # -*- coding: utf-8 -*-
 """
 ########## Term Project ############
@@ -146,7 +147,7 @@ class UserInterface:  # user interface
             annualReport.displayAnnualSummary()
 
     def logon_menu(self):
-        user = LoginInputScreen()
+        user = LoginInputScreen(self.__UserList)
         userList = UserList(self.__UserList, self.__password,
                             self.__tenants_list, self.__rent_records,
                             self.__expenses_List)
@@ -161,7 +162,7 @@ class UserInterface:  # user interface
                     userList.return_user(user)
                     self.__loged_user_idx = userList.get_logged_idx()
             elif login == '2':  # create new user/password and login
-                lis = LoginInputScreen()
+                lis = LoginInputScreen(self.__UserList)
                 user = lis.inputNewUser()
                 if user is not None:
                     if userList.add_user(user) is None:
