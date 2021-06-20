@@ -15,10 +15,11 @@
 
 
 class LoginInputScreen:
-    def __init__(self):
+    def __init__(self, user_list):
         self.__username = ""  # prefixing with __ enforces private access
         self.__password = ""
         self.__confirmPassword = ""
+        self.__user_list = user_list
 
     def getUserPassword(self):
         return(self.__username, self.__password)
