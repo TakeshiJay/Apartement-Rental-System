@@ -2,10 +2,10 @@
 """
 ########## Term Project ############
 #                                  #
-# @author Sterling Engle           #
+# owner: @author Sterling Engle    #
 #                                  #
-# Due TBD at 23:59 PDT             #
-# Finished: TBD at TBD             #
+# Due Jun 24, 2021 at 11:59 PM PDT #
+# Finished: Jun 20, 2021           #
 #----------------------------------#
 # CSULB CECS 343 Intro to S/W Engr #
 # Professor Phuong Nguyen          #

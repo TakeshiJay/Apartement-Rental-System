@@ -2,13 +2,11 @@
 """
 ########## Term Project ############
 #                                  #
-# @author Jacob Sunia              #
-# @author Sterling Engle           #
-# @author Matthew Chung            #
-# @author Larry Delgado            #
+# owner: @author Jacob Sunia       #
+#        @author Sterling Engle    #
 #                                  #
-# Due TBD at 23:59 PDT             #
-# Finished: TBD at TBD             #
+# Due Jun 24, 2021 at 11:59 PM PDT #
+# Finished: June 19, 2021          #
 #----------------------------------#
 # CSULB CECS 343 Intro to S/W Engr #
 # Professor Phuong Nguyen          #

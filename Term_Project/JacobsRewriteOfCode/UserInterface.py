@@ -2,11 +2,12 @@
 """
 ########## Term Project ############
 #                                  #
-# @author Jacob Sunia              #
-# @author Sterling Engle           #
-# @author Larry Delgado            #
+# owner: @author Jacob Sunia       #
+#        @author Sterling Engle    #
+#        @author Larry Delgado     #
+#        @author Matthew Chung     #
 #                                  #
-# Due TBD at 23:59 PDT             #
+# Due Jun 24, 2021 at 11:59 PM PDT #
 # Finished: TBD at TBD             #
 #----------------------------------#
 # CSULB CECS 343 Intro to S/W Engr #
@@ -15,6 +16,11 @@
 """
 
 
+# JavaScript Object Notation, is an open standard file format and data
+# interchange format that uses human-readable text to store and transmit data
+# objects consisting of attribute–value pairs and arrays
+# (or other serializable values)
+import json  # json used to read and write from persistent storage data file
 from LoginInputScreen import LoginInputScreen
 from TenantList import TenantList
 from TenantInputScreen import TenantInputScreen
@@ -24,14 +30,6 @@ from RentRow import RentRow
 from RentRecords import RentRecords
 from UserList import UserList
 from AnnualReport import AnnualReport
-
-
-# JavaScript Object Notation, is an open standard file format and data
-# interchange format that uses human-readable text to store and transmit data
-# objects consisting of attribute–value pairs and arrays
-# (or other serializable values)
-import json  # json used to read and write from persistent storage data file
-# import time  # time used to delay some processes that we need to slow down
 
 
 # UserInterface class conains the login and menu process
@@ -49,9 +47,11 @@ class UserInterface:  # user interface
     # users' apartments.
     # @param __rent_records is a list of records throughout a yearly cycle
     # that record all tenant payment transactions.
-    def __init__(self):
-        f = open('login.json', )
+    def __init__(self, dataFile='UsersApartmentData.json'):
+        self.__dataFile = dataFile
+        f = open(self.__dataFile, "r")
         self.__dic = json.load(f)
+        f.close()
         self.__UserList = self.__dic["Username"]
         self.__password = self.__dic["Password"]
         self.__expenses_List = self.__dic["Expenses"]
@@ -59,6 +59,8 @@ class UserInterface:  # user interface
         self.__tenants_list = self.__dic["TenantList"]
         self.__rent_records = self.__dic["RentRecords"]
         self.__tenantList = None  # logged-in user TenantList
+        self.__expenseRecords = None  # logged-in user ExpenseRecords
+        self.__rentRecords = None  # logged-in user RentRecords
 
     def loginMainMenu(self):
         self.print_menus(1)
@@ -68,9 +70,12 @@ class UserInterface:  # user interface
             if logonStatus == 2:
                 return False  # quit
 
+        # Save logged-in user TenantList, ExpenseRecords and RentRecords
+        # in self.__tenantList, self.__expenseRecords, and self.__rentRecords
         self.__tenantList = \
             TenantList(self.__tenants_list[self.__loged_user_idx])
         self.__tenantScreen = TenantInputScreen(self.__tenantList)
+        # TODO
 
         scanner = ''
         while (scanner != 'l'):
@@ -87,7 +92,7 @@ class UserInterface:  # user interface
                                   "to main menu: ")
                 self.output_screen(scanner_2)
             elif scanner.lower() == 'l':
-                print("Thank you for using the Apartment Management System "
+                print("Thank you for using the Apartment Rental System "
                       "by Team 6.")
                 print("See you again soon!\n")
                 return True
@@ -175,8 +180,9 @@ class UserInterface:  # user interface
 
     def print_menus(self, num):
         if num == 1:
-            print('Welcome to the Apartment Management System v0.3')
-            print('Please select one of the following login options:')
+            print("Welcome to the Apartment Rental System - "
+                  "Multiuser Edition v0.4")
+            print("Please select one of the following login options:")
         elif num == 3:
             print("\nEnter 't' to add or replace a Tenant,")
             print("      'r' to record a Rent payment,")
@@ -192,6 +198,6 @@ class UserInterface:  # user interface
 
     def store_to_file(self):
         js = json.dumps(self.__dic)
-        f = open("login.json", "w")
+        f = open(self.__dataFile, "w")
         f.write(js)
         f.close()
