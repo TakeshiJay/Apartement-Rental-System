@@ -3,9 +3,6 @@
 ########## Term Project ############
 #                                  #
 # @author Sterling Engle           #
-# @author Jacob Sunia              #
-# @author Matthew Chung            #
-# @author Larry Delgado            #
 #                                  #
 # Due TBD at 23:59 PDT             #
 # Finished: TBD at TBD             #
@@ -15,6 +12,8 @@
 ####################################
 """
 
+from Tenant import Tenant
+
 
 # The TenantList class maintains a list of Tenant objects in private memory
 # and provides public methods for list manipulation and output.
@@ -22,7 +21,13 @@ class TenantList:
 
     # __init__(self) function is the overloaded class constructor
     def __init__(self, tenantList):
-        self.__tenants = tenantList
+        if len(tenantList) > 0 and type(tenantList[0]) is dict:
+            self.__tenants = []
+            for entry in tenantList:
+                self.__tenants.append(Tenant(entry.get("aptNumber"),
+                                             entry.get("name")))
+        else:
+            self.__tenants = tenantList
 
     # returns index position of apartment number and/or tenant name in list,
     # else None.
@@ -36,6 +41,16 @@ class TenantList:
                 if aptNum is None or aptNum == aNum:
                     return pos
         return None
+
+    # getTenantList returns the tenant list as a dictionary
+    def getTenantDict(self):
+        tenantDictList = []
+        for tenant in self.__tenants:
+            tenantDict = {}
+            tenantDict["aptNumber"] = tenant.getApt()
+            tenantDict["name"] = tenant.getTenant()
+            tenantDictList.append(tenantDict)
+        return tenantDictList
 
     # insertTenant adds newTenant name to provided apartment number
     # if the apartment number is negative, it deletes abs(apartment number) if
@@ -88,7 +103,9 @@ class TenantList:
         return str
 
     def display(self):
+        print()
         print("Apt # Tenant Name")
         print("----- -----------")
-        print(self)
+        for i in range(len(self.__tenants)):
+            print(self.__tenants[i])
         return

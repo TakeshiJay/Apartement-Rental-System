@@ -10,8 +10,8 @@ class RentInputScreen:  # rental input screen
     @classmethod
     def inputRentPayment(cls):
         return(cls(
-            input('Insert Tenant Name'),
-            int(input('Enter Month No.:')),
-            float(input('Enter Payment Amount:'))
+            input('Enter Tenant Name: '),
+            int(input('Enter Month No.: ')),
+            float(input('Enter Rent Payment: '))
             )
         )

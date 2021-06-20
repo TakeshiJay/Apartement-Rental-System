@@ -3,9 +3,6 @@
 ########## Term Project ############
 #                                  #
 # @author Sterling Engle           #
-# @author Matthew Chung            #
-# @author Larry Delgado            #
-# @author Jacob Sunia              #
 #                                  #
 # Due TBD at 23:59 PDT             #
 # Finished: TBD at TBD             #
@@ -21,8 +18,8 @@ from Tenant import Tenant
 
 
 class TenantInputScreen:  # Tenant input screen
-    def __init__(self, existingTenantList):
-        self.__existingTenants = existingTenantList
+    def __init__(self, tenantList):
+        self.__tenants = tenantList
         self.__aptNum = -1
         self.__tenantName = None
 
@@ -32,11 +29,11 @@ class TenantInputScreen:  # Tenant input screen
     def inputTenant(self):
         aptStr = input("Apartment # (-# to remove): ")
         if re.match("[-+]?\d+$", aptStr) is None:
-            return self.__existingTenants
+            return self.__tenants
         self.__aptNum = int(aptStr)
         if self.__aptNum == 0:
-            return self.__existingTenants
-        existing = self.__existingTenants.findTenant(abs(self.__aptNum))
+            return self.__tenants
+        existing = self.__tenants.findTenant(abs(self.__aptNum))
 
         if existing is not None:
             if self.__aptNum < 0:
@@ -48,7 +45,7 @@ class TenantInputScreen:  # Tenant input screen
                 delete = input(f"Apartment {self.__aptNum} {tenant}. Remove"
                                " from building (y/n)? ").lower()
                 if delete != 'y':
-                    return self.__existingTenants
+                    return self.__tenants
                 else:
                     self.__tenantName = ""
             elif existing.getTenant() != "":
@@ -56,7 +53,7 @@ class TenantInputScreen:  # Tenant input screen
                                 f"to {existing.getTenant()}."
                                 " Replace or vacate (y/n)? ").lower()
                 if replace != 'y':
-                    return self.__existingTenants
+                    return self.__tenants
                 else:
                     self.__tenantName = input("New tenant name "
                                               "or [Enter] to vacate: ")
@@ -66,7 +63,7 @@ class TenantInputScreen:  # Tenant input screen
             self.__tenantName = input("Tenant name: ")
 
         newTenant = Tenant(self.__aptNum, self.__tenantName)
-        tenant = self.__existingTenants.insertTenant(newTenant)
+        tenant = self.__tenants.insertTenant(newTenant)
         if self.__aptNum > 0:
             if self.__tenantName != "":
                 print(f"Apartment {tenant.getApt()} assigned "
@@ -80,4 +77,4 @@ class TenantInputScreen:  # Tenant input screen
         else:
             print(f"Apartment {-self.__aptNum} not found -"
                   " not removed from building.")
-        return self.__existingTenants
+        return self.__tenants

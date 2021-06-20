@@ -4,7 +4,6 @@
 #                                  #
 # @author Jacob Sunia              #
 # @author Sterling Engle           #
-# @author Matthew Chung            #
 # @author Larry Delgado            #
 #                                  #
 # Due TBD at 23:59 PDT             #
@@ -59,6 +58,7 @@ class UserInterface:  # user interface
         self.__loged_user_idx = -1
         self.__tenants_list = self.__dic["TenantList"]
         self.__rent_records = self.__dic["RentRecords"]
+        self.__tenantList = None  # logged-in user TenantList
 
     def loginMainMenu(self):
         self.print_menus(1)
@@ -97,15 +97,9 @@ class UserInterface:  # user interface
 
     def inputScreen(self, scanner_2):
         if scanner_2 == 't':
+            self.__tenantList = self.__tenantScreen.inputTenant()
             self.__tenants_list[self.__loged_user_idx] = \
-                self.__tenantScreen.inputTenant()
-            # TODO: convert into format here for JSON storage
-
-            # tenant = Tenant()
-            # ten_list = TenantList(self.__tenants_list[self.__loged_user_idx],
-            #                       self.__rent_records[self.__loged_user_idx])
-            # ten_list.inputTenant(tenant.getTenant(), tenant.getApt())
-        #
+                self.__tenantList.getTenantDict()
         elif scanner_2 == 'r':
             rent_row = RentRow()
             rent_list = RentRecords(self.__rent_records, self.__loged_user_idx,
@@ -126,14 +120,14 @@ class UserInterface:  # user interface
                                    expense.get_amount())
             expense_List.displaySummary()
             # we should move this line to output_screen
-        # TODO remove next line when TenantList converted and handled in here
-        if scanner_2 != 't':
-            self.store_to_file()
+
+        self.store_to_file()
 
     # Output Screen
     def output_screen(self, scanner_2):
         if scanner_2 == 't':
-            tenantList = TenantList(self.__tenants_list)
+            tenantList = \
+                TenantList(self.__tenants_list[self.__loged_user_idx])
             tenantList.display()
         elif scanner_2 == 'r':
             rentRecords = RentRecords(self.__rent_records)
