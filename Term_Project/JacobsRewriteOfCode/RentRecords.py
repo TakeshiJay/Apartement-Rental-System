@@ -58,4 +58,5 @@ class RentRecords:
         printable = self.printable_Dictionary(user_login_idx)
         print("\n==== Rent Summary =====")
         print(tabulate(printable,headers=self.__months))
-        
+        print('Total Rent Collected: $',self.getSumOfRents())
+        print()
