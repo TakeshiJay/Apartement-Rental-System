@@ -15,8 +15,6 @@
 # Professor Phuong Nguyen          #
 ####################################
 """
-
-
 # JavaScript Object Notation, is an open standard file format and data
 # interchange format that uses human-readable text to store and transmit data
 # objects consisting of attribute–value pairs and arrays
@@ -118,7 +116,7 @@ class UserInterface:  # user interface
                                    expense.get_category(),
                                    expense.get_payee(),
                                    expense.get_amount())
-            expense_List.displaySummary()
+            expense_List.displaySummary(self.__loged_user_idx)
             # we should move this line to output_screen
 
         self.store_to_file()
@@ -129,13 +127,13 @@ class UserInterface:  # user interface
             tenantList = TenantList(self.__tenants_list[self.__loged_user_idx])
             tenantList.display()
         elif scanner_2 == 'r':
-            rentRecords = RentRecords(self.__rent_records, self.__tenantList)
+            rentRecords = RentRecords(self.__rent_records, self.__tenants_list)
             rentRecords.display(self.__loged_user_idx)
         elif scanner_2 == 'e':
-            expenseRecords = ExpenseRecords(self.__expenses_List)
+            expenseRecords = ExpenseRecords(self.__expenses_List[self.__loged_user_idx])
             expenseRecords.displaySummary()
         elif scanner_2 == 'a':
-            annualReport = AnnualReport()
+            annualReport = AnnualReport(self.__expenses_List[self.__loged_user_idx], self.__rent_records, self.__tenants_list[self.__loged_user_idx])
             annualReport.calc_netProfit()
             annualReport.displayAnnualSummary()
 
