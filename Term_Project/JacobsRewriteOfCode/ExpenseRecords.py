@@ -13,7 +13,7 @@
 ####################################
 """
 
-# import tabulate
+import tabulate
 
 
 class ExpenseRecords:
@@ -21,6 +21,7 @@ class ExpenseRecords:
     def __init__(self, expenseRecord):
         self.__expenses = {}
         self.__updatedList = expenseRecord
+        self.__map = ['Month','Day','Category','Payee','Amount']
 
     def insertExp(self, month, day, category, payee, amount):
         self.__expenses['Month'] = month
@@ -32,21 +33,19 @@ class ExpenseRecords:
 
     # If key is 'Amount' add the value of it to eTotal
     def return_total_expenses(self):
-        eTotal = 0
-        for key in self.__updatedList:
-            if key == 'Amount':
-                eTotal += self.__updatedList[key]
-        return eTotal
+        sum = 0.0
+        for i in self.__updatedList:
+            sum += i['Amount']
+        return sum   
 
     # Print Expense Records
     def displaySummary(self):
+        print(self.__updatedList)
         print("==== Expense Summary ====")
-        print(self)
         # Tabulate
-        '''
         headers = self.__updatedList[0].keys()
         rows = [x.values() for x in self.__updatedList]
         print(tabulate.tabulate(rows, headers, tablefmt='rst'))
-        '''
         # Print Expense Total Last
-        print("\nExpense Total: " + str(self.return_total_expenses()))
+        # print("\nExpense Total: " + str(self.return_total_expenses()))
+        print('Total Expense: $',self.return_total_expenses())
