@@ -1,4 +1,4 @@
-import tabulate
+from tabulate import tabulate
 # -*- coding: utf-8 -*-
 """
 ########## Term Project ############
@@ -19,11 +19,23 @@ class RentRecords:
     def __init__(self, __rentRecord, __tenantList):
         self.__rows = __rentRecord  # RentRecords dictionary
         self.__tenantList = __tenantList
-        self.__months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
+        self.__months = ['Ap.No','Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec']
         
     def insertRent(self, rent_record, user_login_idx, ten_idx):
         name, month, amount = rent_record.getInfo()
-        self.__rows[user_login_idx][ten_idx][month] = amount
+        self.__rows[user_login_idx][ten_idx][month] += amount
+
+    def printable_Dictionary(self, user_login_idx):
+        aptNo = []
+        
+        for i in self.__tenantList:
+            aptNo.append([i['aptNumber']])
+
+        print(self.__rows[user_login_idx])
+        for i in aptNo:
+            index = aptNo.index(i)
+            i.extend(self.__rows[user_login_idx][index])
+        return(aptNo)        
 
 
     # Get Rent Total
@@ -43,28 +55,7 @@ class RentRecords:
 
     # Print Rent Record
     def display(self, user_login_idx):
+        printable = self.printable_Dictionary(user_login_idx)
         print("\n==== Rent Summary =====")
-        # Tabulate
-        for i in self.__months:
-            print(i, end='\t\t')
-        print()
-
-        # for i in self.__rows[user_login_idx]:
-        #     for j in i:
-        #         aligned_j = "{:<5}".format(j)
-        #         print(aligned_j, end='\t')
-        #     print()
-        # print()
-        for i in range(len(self.__rows[user_login_idx])):
-            print(self.__rows[user_login_idx][i])
-
-        # headers = self.__rows[user_login_idx].keys()
-        # rows = [x.values() for x in self.__rows[user_login_idx]]
-        # print(tabulate.tabulate(rows, headers, tablefmt='rst'))
-
-        # headers = self.__rows.keys()
-        # rows = [x.values() for x in self.__rows]
-        # print(tabulate.tabulate(rows, headers, tablefmt='rst'))
+        print(tabulate(printable,headers=self.__months))
         
-        # Print Rent Total Last
-        # print(f"\nRent Total: ${self.getSumOfRents():.2f}")
