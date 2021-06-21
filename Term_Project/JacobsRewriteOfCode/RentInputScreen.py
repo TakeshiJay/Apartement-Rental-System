@@ -31,6 +31,7 @@ class RentInputScreen:  # rental input screen
         for i, dic in enumerate(self.__tenant_list[login_idx]):
             if dic['name'] == self.__Name:
                 self.__idx = i
+            
 
     def inputRent(self, login_idx):
         flag = False
@@ -45,23 +46,29 @@ class RentInputScreen:  # rental input screen
             self.inputRent(login_idx)
         self.getIndex(login_idx)
         
-        while (self.__month < 0) or (self.__month > 13):
+        while (self.__month < 0) or (self.__month > 11):
             try:
+                print('Months range from (1-12)')
                 self.__month = int(input('Please Select a Month Number:'))
                 self.__month = self.__month - 1
+                if (self.__month > 11) or (self.__month < 0):
+                    print('Invalid Month Number, Try again')
+                    self.__month = -1
             except:
                 print('Invalid Entry, Try Again...')
+                self.__month = -1
+            
         while flag == False:
-            self.__amount = float(input('Please Enter an Amount you want to Add:'))
-            print('Amount:',self.__amount)
-            ays = input('Is this the Correct amount (Y/N):')
-            if ays.lower() == 'y':
-                flag = True
+            try:
+                self.__amount = float(input('Please Enter an Amount you want to Add:'))
+                print('Amount: $',self.__amount)
+                ays = input('Is this the Correct amount (Y/N):')
+                if ays.lower() == 'y':
+                    flag = True
+            except:
+                return(self.__rent_list)
         rentRow = RentRow(self.__Name, self.__month, self.__amount)
         rentRecord = RentRecords(self.__rent_list, self.__tenant_list)
         rentRecord.insertRent(rentRow, login_idx, self.__idx)
 
         return(self.__rent_list)
-
-        
-
