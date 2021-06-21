@@ -9,19 +9,18 @@ Team 6: Sterling Engle (lead)
 Python Class Ownership(*) and Roles:
 
 Jacob:
-1. UserInterface.py
-2. UserList.py
-3. main.py
-4. All JSON-related code
-5. UsersApartmentData.json data file design (was login.json)
+1. UserInterface.py (done)
+2. UserList.py (done)
+3. main.py (done)
+4. All JSON-related code (needs ExpenseRecords, RentRecords to work like TenantList)
+5. UsersApartmentData.json data file design (done)
 6. Integration testing, open and assign github repo issues (bugs)
 
 Larry:
 1. ExpenseInputScreen.py
 2. ExpenseRecords.py
 3. Expense.py
-4. AnnualReport.py
-5. Fix and close assigned github repo issues (bugs)
+4. Fix and close assigned github repo issues (bugs)
 
 Matthew:
 1. RentInputScreen.py
@@ -30,12 +29,16 @@ Matthew:
 4. Fix and close assigned github repo issues (bugs)
 
 Sterling:
-1. TenantInputScreen.py
-2. TenantList.py
-3. Tenant.py
-4. LoginInputScreen.py
-5. Menu interface design
-6. Final system testing, open and assign github repo issues (bugs)
+1. TenantInputScreen.py (done)
+2. TenantList.py (done)
+3. Tenant.py (done)
+4. LoginInputScreen.py (done)
+5. AnnualReport.py (about to start)
+6. Menu interface design (done)
+
+Everyone:
+1. Final system testing, open and assign github repo issues (bugs)
+2. Revise final report CRC cards and class diagrams to match our actual code
 
 (*) Class Ownership means you are primarily responsible for this class and will be initially assigned all of its issues. If you need help with an issue, assign it to an additional team member.
 
