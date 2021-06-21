@@ -27,7 +27,7 @@ from TenantList import TenantList
 from TenantInputScreen import TenantInputScreen
 from Expense import Expense
 from ExpenseRecords import ExpenseRecords
-from RentRow import RentRow
+from RentInputScreen import RentInputScreen
 from RentRecords import RentRecords
 from UserList import UserList
 from AnnualReport import AnnualReport
@@ -107,14 +107,8 @@ class UserInterface:  # user interface
             self.__tenants_list[self.__loged_user_idx] = \
                 self.__tenantList.getTenantDict()
         elif scanner_2 == 'r':
-            rent_row = RentRow()
-            rent_list = RentRecords(self.__rent_records, self.__loged_user_idx,
-                                    self.__tenants_list[self.__loged_user_idx])
-            rent_list.insertRent(rent_row.get_month(),
-                                 rent_row.get_amount(),
-                                 rent_row.get_name())
-            self.rentRecords = rent_list
-        #
+            RIS = RentInputScreen(self.__rent_records, self.__tenants_list)
+            self.__rent_records = RIS.inputRent(self.__loged_user_idx)
         elif scanner_2 == 'e':
             expense = Expense()
             expense_List = \
@@ -132,12 +126,11 @@ class UserInterface:  # user interface
     # Output Screen
     def output_screen(self, scanner_2):
         if scanner_2 == 't':
-            tenantList = \
-                TenantList(self.__tenants_list[self.__loged_user_idx])
+            tenantList = TenantList(self.__tenants_list[self.__loged_user_idx])
             tenantList.display()
         elif scanner_2 == 'r':
-            rentRecords = RentRecords(self.__rent_records)
-            rentRecords.display()
+            rentRecords = RentRecords(self.__rent_records, self.__tenantList)
+            rentRecords.display(self.__loged_user_idx)
         elif scanner_2 == 'e':
             expenseRecords = ExpenseRecords(self.__expenses_List)
             expenseRecords.displaySummary()
@@ -147,7 +140,7 @@ class UserInterface:  # user interface
             annualReport.displayAnnualSummary()
 
     def logon_menu(self):
-        lis = LoginInputScreen(self.__UserList)
+        user = LoginInputScreen(self.__UserList)
         userList = UserList(self.__UserList, self.__password,
                             self.__tenants_list, self.__rent_records,
                             self.__expenses_List)
@@ -156,13 +149,13 @@ class UserInterface:  # user interface
             login = input("Enter 1 to login, 2 to create new user, "
                           "or 'q' to Quit: ")
             if login == '1':  # user login
-                # lis = LoginInputScreen(self.__UserList)
+                lis = LoginInputScreen(self.__UserList)
                 user = lis.inputUser()
                 if user is not None:
                     userList.return_user(user)
                     self.__loged_user_idx = userList.get_logged_idx()
             elif login == '2':  # create new user/password and login
-                # lis = LoginInputScreen(self.__UserList)
+                lis = LoginInputScreen(self.__UserList)
                 user = lis.inputNewUser()
                 if user is not None:
                     if userList.add_user(user) is None:
