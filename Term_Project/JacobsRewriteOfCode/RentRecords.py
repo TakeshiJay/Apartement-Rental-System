@@ -14,7 +14,6 @@ import tabulate
 # Professor Phuong Nguyen          #
 ####################################
 """
-from RentRow import RentRow 
 
 class RentRecords:
     def __init__(self, __rentRecord, __tenantList):
