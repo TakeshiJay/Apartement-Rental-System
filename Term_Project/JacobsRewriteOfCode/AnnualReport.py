@@ -1,3 +1,4 @@
+  
 # -*- coding: utf-8 -*-
 """
 ########## Term Project ############
@@ -15,26 +16,29 @@
 """
 
 # import tabulate
-import ExpenseRecords
-import RentRecords
+from ExpenseRecords import ExpenseRecords
+from RentRecords import RentRecords
 
 
 # Initialize class records from previous into 1 Annual Report instance
 class AnnualReport:
-    def __init__(self, __expenseRecords, __rentRecords):
+    def __init__(self, __expenseRecords, __rentRecords, tenant_list):
         self.__report1 = ExpenseRecords(__expenseRecords)
-        self.__report2 = RentRecords(__rentRecords)
+        self.__report2 = RentRecords(__rentRecords, tenant_list)
 
     def calc_netProfit(self):
-        netProfit = RentRecords.return_total_rents() - \
-            ExpenseRecords.return_total_expenses()
+        netProfit = self.__report2.getSumOfRents() - self.__report1.return_total_expenses()
         return netProfit
 
     # The whole annual summary
     def displayAnnualSummary(self):
         print("Annual Summary\n")
-        self.__report2.display()
+        rent_tot = self.__report2.getSumOfRents()
+        expe_tot = self.__report1.return_total_expenses()
+
+        print('Income')
+        print('Rent Total: $', rent_tot)
         print(" ")
-        self.__report1.displaySummary()
+        print('Expense Total: $', expe_tot)
         # Net Profit
         print("\nNet Profit: " + str(self.calc_netProfit()))
