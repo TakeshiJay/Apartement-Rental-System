@@ -30,8 +30,6 @@ class RentRecords:
         
         for i in self.__tenantList:
             aptNo.append([i['aptNumber']])
-
-        print(self.__rows[user_login_idx])
         for i in aptNo:
             index = aptNo.index(i)
             i.extend(self.__rows[user_login_idx][index])
