@@ -13,14 +13,12 @@
 ####################################
 """
 
-# TODO  REMOVE THIS!
-from RentInputScreen import RentInputScreen
-
 
 class RentRow:
-    def __init__(self):
-        ris = RentInputScreen.inputRentPayment()
-        self.__name, self.__month, self.__amount = ris.inputRentPayment()
+    def __init__(self, name, month, amount):
+        self.__name = name
+        self.__month = month
+        self.__amount = amount
 
     def get_name(self):
         return(self.__name)
@@ -30,3 +28,6 @@ class RentRow:
 
     def get_amount(self):
         return(self.__amount)
+    
+    def getInfo(self):
+        return(self.__name, self.__month, self.__amount)
