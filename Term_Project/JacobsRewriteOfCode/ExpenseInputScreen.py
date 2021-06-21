@@ -29,9 +29,9 @@ class ExpenseInputScreen:  # Expense input screen
     @classmethod
     def inputExpense(cls):
         return cls(
-            int(input("Month No.:")),
-            int(input("Day No.:")),
-            input("Category:"),
-            input("Payee:"),
-            float(input("Amount.:"))
+            int(input("Month No.: ")),
+            int(input("Day No.: ")),
+            input("Category: "),
+            input("Payee: "), 
+            float(input("Amount: "))
         )
