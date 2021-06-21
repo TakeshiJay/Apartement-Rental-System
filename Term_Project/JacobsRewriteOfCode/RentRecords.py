@@ -27,14 +27,15 @@ class RentRecords:
 
     def printable_Dictionary(self, user_login_idx):
         aptNo = []
-        
-        for i in self.__tenantList:
+        # print(self.__tenantList)
+
+        for i in self.__tenantList[user_login_idx]:
             aptNo.append([i['aptNumber']])
+
         for i in aptNo:
             index = aptNo.index(i)
             i.extend(self.__rows[user_login_idx][index])
         return(aptNo)        
-
 
     # Get Rent Total
     def getSumOfRents(self):
@@ -56,5 +57,4 @@ class RentRecords:
         printable = self.printable_Dictionary(user_login_idx)
         print("\n==== Rent Summary =====")
         print(tabulate(printable,headers=self.__months))
-        print('Total Rent Collected: $',self.getSumOfRents())
-        print()
+        print('Total Rent Collected: $',self.getSumOfRents())     
