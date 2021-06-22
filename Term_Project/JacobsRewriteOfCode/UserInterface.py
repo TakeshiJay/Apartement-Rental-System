@@ -23,7 +23,7 @@ import json  # json used to read and write from persistent storage data file
 from LoginInputScreen import LoginInputScreen
 from TenantList import TenantList
 from TenantInputScreen import TenantInputScreen
-from Expense import Expense
+from ExpenseInputScreen import ExpenseInputScreen
 from ExpenseRecords import ExpenseRecords
 from RentInputScreen import RentInputScreen
 from RentRecords import RentRecords
@@ -109,16 +109,8 @@ class UserInterface:  # user interface
             RIS = RentInputScreen(self.__rent_records, self.__tenants_list)
             self.__rent_records = RIS.inputRent(self.__loged_user_idx)
         elif scanner_2 == 'e':
-            expense = Expense()
-            expense_List = \
-                ExpenseRecords(self.__expenses_List[self.__loged_user_idx])
-            expense_List.insertExp(expense.get_month(),
-                                   expense.get_day(),
-                                   expense.get_category(),
-                                   expense.get_payee(),
-                                   expense.get_amount())
-            expense_List.displaySummary(self.__loged_user_idx)
-            # we should move this line to output_screen
+            EIS = ExpenseInputScreen(self.__expenses_List[self.__loged_user_idx])
+            EIS.inputExpense()
 
         self.store_to_file()
 
