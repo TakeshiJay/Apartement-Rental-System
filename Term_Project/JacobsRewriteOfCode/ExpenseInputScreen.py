@@ -61,7 +61,7 @@ class ExpenseInputScreen:  # Expense input screen
             else:
                 self.__month = int(monthStr)
                 if (self.__month > 12) or (self.__month < 1):
-                    print(f'Invalid month {self.month}, please '
+                    print(f'Invalid month {self.__month}, please '
                           'try again (1-12)')
                     self.__month = datetime.datetime.now().month
                     continue
