@@ -3,7 +3,7 @@
 ########## Term Project ############
 #                                  #
 # co-owner: @author Jacob Sunia    #
-# co-owner: @author Jacob Sunia    #
+# co-owner: @author Sterling Engle #
 #                                  #
 # Due Jun 24, 2021 at 11:59 PM PDT #
 # Finished: June 21, 2021          #
@@ -19,7 +19,13 @@ from RentRow import RentRow
 from RentRecords import RentRecords
 
 
-class RentInputScreen:  # rental input screen
+# Rent Input UI class
+# @param rent_list    rent records list of dictionaries for all users
+# @param tenant_list  tenant list of dictionaries for all users
+#
+# See "UsersApartmentsData.json" for the JSON file with key/value pairs
+#
+class RentInputScreen:
     def __init__(self, rent_list, tenant_list):
         self.__Name = None
         self.__month = -1
@@ -35,13 +41,26 @@ class RentInputScreen:  # rental input screen
         for i, dic in enumerate(self.__tenant_list[login_idx]):
             if dic['name'] == self.__Name:
                 self.__tenantIndex = i
-
+    """
     def getIndex(self, login_idx):
         for i, dic in enumerate(self.__tenant_list[login_idx]):
             if dic['name'] == self.__Name:
                 self.__tenantIndex = i
+    """
 
+    # inputRent inputs one tenant name, month(1-12) and rent payment
+    #
+    # @param login_idx  user login index in the JSON file dictionary list
+    #
+    # Note: This method always returns self.__rent_list since it may add new
+    #       values to give the caller the updated rent list
     def inputRent(self, login_idx):
+        # robust tenant name collection reprompts user until either:
+        #
+        # 1. user enters [enter] returns to caller without doing anything.
+        # 2. searches for tenant name in the list.
+        #    A. if not found, inform user, set tenant name to "", start over
+        #    B. if found, set the tenant index
         while self.__Name is None or self.__Name == "":
             self.__Name = input("Enter rent payment tenant name: ")
             if self.__Name == "":
@@ -83,7 +102,6 @@ class RentInputScreen:  # rental input screen
             if amountStr == "":  # if amount string is empty return
                 return self.__rent_list
             # TODO force 0-2 digits after decimal point using regular exp.
-            # elif re.match(r'^-?\d+(?:\.\d+)$', amountStr) is None:
             elif re.match(r'^-?\d+(?:\.?\d+)$', amountStr) is None:
                 print(f'Invalid amount "{amountStr}", please enter dollars '
                       "and cents (250.42) with no $")
