@@ -53,7 +53,7 @@ class RentRecords:
             for name in user:
                 for month in name:
                     rTotal += month
-        return rTotal
+        return round(rTotal,2)
 
     # Print Rent Record
     def display(self, user_login_idx):
