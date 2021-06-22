@@ -13,12 +13,12 @@
 ####################################
 """
 
-#from ExpenseInputScreen import ExpenseInputScreen
+from ExpenseInputScreen import ExpenseInputScreen
 
 
 class Expense:
     def __init__(self):
-        eis = ExpenseInputScreen.inputExpense()
+        eis = ExpenseInputScreen()
         self.__month, self.__day, self.__category, self.__payee,
         self.__amount = eis.getExpense()
 

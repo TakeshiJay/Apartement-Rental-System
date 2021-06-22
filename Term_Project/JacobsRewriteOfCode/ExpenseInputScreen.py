@@ -13,6 +13,7 @@
 # Professor Phuong Nguyen          #
 ####################################
 """
+import re
 from Expense import Expense
 from ExpenseRecords import ExpenseRecords
 
@@ -39,11 +40,11 @@ class ExpenseInputScreen:  # Expense input screen
                 print(f'Invalid month "{monthStr}", please try again (1-12)')
                 continue
             else:
-                self.month = int(monthStr) - 1  #[0]
-                if (self.month > 11) or (self.month < 0):
+                self.__month = int(monthStr) - 1  #[0]
+                if (self.__month > 11) or (self.month < 0):
                     print(f'Invalid month {self.month}, please '
                           'try again (1-12)')
-                    self.month = -1
+                    self.__month = -1
             hiddenMonth = self.__month
 
         while (self.__day < 0) or (self.__day > 29):
