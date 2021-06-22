@@ -1,3 +1,4 @@
+  
 # -*- coding: utf-8 -*-
 """
 ########## Term Project ############
@@ -42,6 +43,9 @@ class ExpenseRecords:
 
     # Print Expense Records
     def displaySummary(self):
+        if len(self.__updatedList) < 1:
+            print('Expense List Is Empty...\n')
+            return
         print(self.__updatedList)
         print("==== Expense Summary ====")
         # Tabulate
