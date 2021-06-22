@@ -13,7 +13,7 @@
 ####################################
 """
 
-from ExpenseInputScreen import ExpenseInputScreen
+#from ExpenseInputScreen import ExpenseInputScreen
 
 
 class Expense:
