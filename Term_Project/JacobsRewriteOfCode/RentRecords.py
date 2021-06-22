@@ -15,7 +15,7 @@
 
 from tabulate import tabulate
 
- 
+
 class RentRecords:
     def __init__(self, __rentRecord, __tenantList):
         self.__rows = __rentRecord  # RentRecords dictionary
