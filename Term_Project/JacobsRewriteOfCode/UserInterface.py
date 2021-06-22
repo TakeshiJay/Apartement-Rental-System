@@ -104,6 +104,7 @@ class UserInterface:  # user interface
             self.__tenantList = self.__tenantScreen.inputTenant()
             self.__tenants_list[self.__loged_user_idx] = \
                 self.__tenantList.getTenantDict()
+            self.__rent_records[self.__loged_user_idx].append([0]*12)
         elif scanner_2 == 'r':
             RIS = RentInputScreen(self.__rent_records, self.__tenants_list)
             self.__rent_records = RIS.inputRent(self.__loged_user_idx)
