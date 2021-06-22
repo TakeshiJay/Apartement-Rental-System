@@ -16,7 +16,7 @@
 
 class RentRow:
     def __init__(self, name, month, amount):
-        self.__rentRow = {}
+        #self.__rentRow = {}
         
         self.__name = name
         self.__month = month
@@ -34,8 +34,10 @@ class RentRow:
     def getInfo(self):
         return(self.__name, self.__month, self.__amount)
     
+    '''
     def getRentSum(self):
         sum = 0.0
         for i in self.__rentRow:
             sum+= i
         return sum
+    '''
