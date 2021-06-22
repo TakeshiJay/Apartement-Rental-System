@@ -42,12 +42,13 @@ class ExpenseRecords:
 
     # Print Expense Records
     def displaySummary(self):
-        # print(self.__updatedList)
+        if len(self.__updatedList) < 1:
+            print("\nNo expense records to display.\n")
+            return
         print("\n                 ==== Expense Summary ====\n")
         # Tabulate
         headers = self.__updatedList[0].keys()
         rows = [x.values() for x in self.__updatedList]
         print(tabulate.tabulate(rows, headers, tablefmt='rst'))
         # Print Expense Total Last
-        # print("\nExpense Total: " + str(self.return_total_expenses()))
-        print('Total Expense: $', self.return_total_expenses())
+        print(f"Total Expenses: ${self.return_total_expenses():0.2f}")
