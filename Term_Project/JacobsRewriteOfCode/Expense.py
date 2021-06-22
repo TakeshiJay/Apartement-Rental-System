@@ -17,9 +17,13 @@ from ExpenseInputScreen import ExpenseInputScreen
 
 
 class Expense:
-    def __init__(self):
-        eis = ExpenseInputScreen()
-        self.__month, self.__day, self.__category, self.__payee,
+    def __init__(self, year, month,day,category,payee):
+        eis = ExpenseInputScreen().inputExpense()
+        self.__year = year
+        self.__month= month
+        self.__day =day
+        self.__category = category
+        self.__payee = payee
         self.__amount = eis.getExpense()
 
     def getRent(self):

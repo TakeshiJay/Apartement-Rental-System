@@ -21,10 +21,11 @@ class ExpenseRecords:
     def __init__(self, expenseRecord):
         self.__expenses = {}
         self.__updatedList = expenseRecord
-        self.__map = ['Month','Day','Category','Payee','Amount']
+        self.__map = ['Year','Month','Day','Category','Payee','Amount']
 
     def insertExp(self, expenseRecord):
-        month, day, category, payee, amount = expenseRecord.getExpense()
+        year, month, day, category, payee, amount = expenseRecord.getExpense()
+        self.__expenses['Year'] = year
         self.__expenses['Month'] = month
         self.__expenses['Day'] = day
         self.__expenses['Category'] = category
