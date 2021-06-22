@@ -21,7 +21,7 @@ class ExpenseRecords:
     def __init__(self, expenseRecord):
         self.__expenses = {}
         self.__updatedList = expenseRecord
-        self.__map = ['Year','Month','Day','Category','Payee','Amount']
+        self.__map = ['Year', 'Month', 'Day', 'Category', 'Payee', 'Amount']
 
     def insertExp(self, expenseRecord):
         year, month, day, category, payee, amount = expenseRecord.getExpense()
@@ -38,16 +38,16 @@ class ExpenseRecords:
         sum = 0.0
         for i in self.__updatedList:
             sum += i['Amount']
-        return sum   
+        return sum
 
     # Print Expense Records
     def displaySummary(self):
-        print(self.__updatedList)
-        print("==== Expense Summary ====")
+        # print(self.__updatedList)
+        print("\n                 ==== Expense Summary ====\n")
         # Tabulate
         headers = self.__updatedList[0].keys()
         rows = [x.values() for x in self.__updatedList]
         print(tabulate.tabulate(rows, headers, tablefmt='rst'))
         # Print Expense Total Last
         # print("\nExpense Total: " + str(self.return_total_expenses()))
-        print('Total Expense: $',self.return_total_expenses())
+        print('Total Expense: $', self.return_total_expenses())
