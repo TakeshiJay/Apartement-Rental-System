@@ -22,8 +22,8 @@ from ExpenseRecords import ExpenseRecords
 class ExpenseInputScreen:  # Expense input screen
     def __init__(self, expense_list):
         self.__year = datetime.datetime.now().year
-        self.__month = -1
-        self.__day = -1
+        self.__month = datetime.datetime.now().month
+        self.__day = datetime.datetime.now().day
         self.__category = None
         self.__payee = None
         self.__amount = 0.00
@@ -50,26 +50,30 @@ class ExpenseInputScreen:  # Expense input screen
                     continue
                 break
 
-        while (self.__month < 0) or (self.__month > 11):
-            monthStr = input("Enter a month (1-12): ")
+        while True:
+            monthStr = input(f"Enter expense month (default {self.__month}): ")
             if monthStr == "":
-                return self.__expense_list
+                break  # accept default today's month
             elif monthStr.isnumeric() is False:
                 print(f'Invalid month "{monthStr}", please try again (1-12)')
+                self.__month = datetime.datetime.now().month
                 continue
             else:
-                self.__month = int(monthStr) - 1  # [0]
-                if (self.__month > 11) or (self.__month < 0):
+                self.__month = int(monthStr)
+                if (self.__month > 12) or (self.__month < 1):
                     print(f'Invalid month {self.month}, please '
                           'try again (1-12)')
-                    self.__month = -1
+                    self.__month = datetime.datetime.now().month
+                    continue
+                else:
+                    break
             hiddenMonth = self.__month
 
         while (self.__day < 0) or (self.__day > 29):
             if (hiddenMonth == 2):
-                dayStr = input("Enter the day (1-28): ")
+                dayStr = input("Enter expense day (1-28): ")
             else:
-                dayStr = input('Please the day (1-31): ')
+                dayStr = input('Enter expense day (1-31): ')
 
             if dayStr == "":
                 return self.__expense_list
@@ -84,15 +88,16 @@ class ExpenseInputScreen:  # Expense input screen
                 self.__day = int(dayStr)
                 break
 
-        self.__category = input('Enter Expense Category(Repairing, Utilities):')
+        self.__category = \
+            input('Enter expense category(e.g. repairs, utilities): ')
         self.__payee = input('Enter payee (Bob\'s Hardware, Big Electric Co):')
 
         while self.__amount == 0:
-            amountStr = input('Enter amount(39.95):')
+            amountStr = input('Enter amount (39.95):')
             if amountStr == "":
-                return self.__expense_list #empty
+                return self.__expense_list # empty
             elif re.match(r'^-?\d+(?:\.?\d+)$', amountStr) is None:
-                print("Invalid input, please do not use $")
+                print('Invalid input "{amountStr}", please do not use $')
                 self.__amount = 0.00
                 continue
             else:
