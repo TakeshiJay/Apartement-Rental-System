@@ -20,9 +20,10 @@ from Tenant import Tenant
 class TenantInputScreen:  # Tenant input screen
     def __init__(self, tenantList):
         self.__tenants = tenantList
-        self.__aptNum = -1
-        self.__tenantName = None
+        self.__aptNum = -1  # apartment number
+        self.__tenantName = None  # tenant name
 
+    # get method returns tenant name and apartment number
     def getTenant(self):
         return(self.__tenantName, self.__aptNum)
 
@@ -42,8 +43,8 @@ class TenantInputScreen:  # Tenant input screen
                     tenant = "is vacant."
                 else:
                     tenant = "assigned to " + existing.getTenant()
-                delete = input(f"Apartment {self.__aptNum} {tenant}. Remove"
-                               " from building (y/n)? ").lower()
+                delete = input(f"Apartment {abs(self.__aptNum)} {tenant}."
+                               " Remove from building (y/n)? ").lower()
                 if delete != 'y':
                     return self.__tenants
                 else:
