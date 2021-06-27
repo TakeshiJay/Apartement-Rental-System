@@ -9,13 +9,19 @@ Project Assignments, Python Class Ownership(*) and Roles:
 Jacob:
 1. UserInterface.py
 2. UserList.py
-3. main.py
-4. 5. UsersApartmentData.json JSON data file design
-5. All JSON-related code
-6. Collaboration diagram (done, needs final review)
-7. Component design diagram (done, need final review)
-8. State diagram
-9. Installation and deployment diagram (done, needs final review)
+3. RentalInputScreen.py
+4. RentRow.py
+5. RentRecords.py
+6. ExpenseInputScreen.py
+7. Expense.py
+8. ExpenseRecords.py
+9. main.py
+10. UsersApartmentData.json JSON data file design
+11. All JSON-related code
+12. Collaboration diagram (done, needs final review)
+13. Component design diagram (done, need final review)
+14. State diagram
+15. Installation and deployment diagram (done, needs final review)
 
 Sterling:
 1. User Interface Design (done)
