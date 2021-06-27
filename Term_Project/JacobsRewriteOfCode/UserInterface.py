@@ -60,6 +60,7 @@ class UserInterface:  # user interface
         self.__expenseRecords = None  # logged-in user ExpenseRecords
         self.__rentRecords = None  # logged-in user RentRecords
 
+    # loginMainMenu is a function that prints menu options for user input on desired program functionality  
     def loginMainMenu(self):
         self.print_menus(1)
         logonStatus = 0  # 0 means not logged in, 1 = logged in, 2 = quit
@@ -98,6 +99,8 @@ class UserInterface:  # user interface
                 print(f'"{scanner}" is an invalid option please try again.')
         return True
 
+    # inputScreen is a function that prints menu options for user input on desired tenant information to input
+    # @param scanner_2 scanner object for user input 
     def inputScreen(self, scanner_2):
         if scanner_2 == 't':
             self.__tenantList = self.__tenantScreen.inputTenant()
@@ -113,7 +116,8 @@ class UserInterface:  # user interface
 
         self.store_to_file()
 
-    # Output Screen
+    # output_screen is a function that prints menu options for user input on which type of data is desired to display
+    # @param scanner_2 scanner object for user input
     def output_screen(self, scanner_2):
         if scanner_2 == 't':
             tenantList = TenantList(self.__tenants_list[self.__loged_user_idx])
@@ -129,6 +133,7 @@ class UserInterface:  # user interface
             annualReport.calc_netProfit()
             annualReport.displayAnnualSummary()
 
+    # logon_menu is a function that takes prints menu item and takes in user input for login and user purposes 
     def logon_menu(self):
         user = LoginInputScreen(self.__UserList)
         userList = UserList(self.__UserList, self.__password,
@@ -162,6 +167,7 @@ class UserInterface:  # user interface
                 print(f'"{login}" is an invalid entry, please try again.')
         return 1  # logged-in
 
+    # print_menus is a function that prints menu options to user for input on tenant finance information
     def print_menus(self, num):
         if num == 1:
             print("Welcome to the Apartment Rental System - "
@@ -180,6 +186,7 @@ class UserInterface:  # user interface
         else:
             print(f"Menu number {num} not supported.")
 
+    # store_to_file is a function that writes info from json file to data file
     def store_to_file(self):
         js = json.dumps(self.__dic)
         f = open(self.__dataFile, "w")
