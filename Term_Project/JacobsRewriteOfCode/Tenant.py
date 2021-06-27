@@ -37,7 +37,7 @@ class Tenant:
         return self.__aptNumber, self.__name
 
     def aptOccupied(self):
-        return self.__name != ""
+        return self.__name is not None and self.__name != ""
 
     def __lt__(self, other):
         if self.__name < other.getTenant():

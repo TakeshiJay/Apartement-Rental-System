@@ -19,7 +19,7 @@ from Tenant import Tenant
 # and provides public methods for list manipulation and output.
 class TenantList:
 
-    # __init__(self) function is the overloaded class constructor
+    # __init__(self) function is the class initializer
     def __init__(self, tenantList):
         if len(tenantList) > 0 and type(tenantList[0]) is dict:
             self.__tenants = []

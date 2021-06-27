@@ -120,3 +120,39 @@ class RentInputScreen:
                           "security deposit return recorded "
                           f"for {self.__Name}")
         return self.__rent_list
+
+
+"""
+        while True:
+            yearStr = input(f"Enter expense year (default {self.__year}): ")
+            if yearStr == "":
+                break
+            elif yearStr.isnumeric() is False:
+                print(f'Invalid year "{yearStr}", please try again')
+                continue
+            else:
+                self.__year = int(yearStr)  # [0]
+                if (self.__year < 2021):
+                    print(f'Invalid year {self.__year}, please '
+                          'try again it must be 2021 or later')
+                    self.__year = 2021
+                break
+
+        self.__monthIndex = self.__year - 2021
+
+        while (self.__month < 0) or (self.__month > 11):
+            monthStr = input("Enter a month (1-12): ")
+            if monthStr == "":
+                return self.__expense_list
+            elif monthStr.isnumeric() is False:
+                print(f'Invalid month "{monthStr}", please try again (1-12)')
+                continue
+            else:
+                self.__month = int(monthStr) - 1  # [0]
+                if (self.__month > 11) or (self.month < 0):
+                    print(f'Invalid month {self.month}, please '
+                          'try again (1-12)')
+                    self.__month = -1
+            hiddenMonth = self.__month
+            self.__monthIndex += (self.__month - 1) % 12
+"""

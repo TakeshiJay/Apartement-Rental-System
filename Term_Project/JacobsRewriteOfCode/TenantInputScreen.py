@@ -18,6 +18,8 @@ from Tenant import Tenant
 
 
 class TenantInputScreen:  # Tenant input screen
+
+    # @param
     def __init__(self, tenantList):
         self.__tenants = tenantList
         self.__aptNum = -1  # apartment number
@@ -28,14 +30,20 @@ class TenantInputScreen:  # Tenant input screen
         return(self.__tenantName, self.__aptNum)
 
     def inputTenant(self):
-        aptStr = input("Apartment # (-# to remove): ")
-        if re.match("[-+]?\d+$", aptStr) is None:
-            return self.__tenants
-        self.__aptNum = int(aptStr)
-        if self.__aptNum == 0:
-            return self.__tenants
-        existing = self.__tenants.findTenant(abs(self.__aptNum))
+        while True:
+            aptStr = input("Apartment # (-# to remove): ")
+            if re.match("[-+]?\d+$", aptStr) is None:
+                print(f'Invalid input "{aptStr}". Apartment # must be a '
+                      'positive or negative number.')
+                continue
+            self.__aptNum = int(aptStr)
+            if self.__aptNum == 0:
+                print(f'Invalid input "{aptStr}. Apartment # must be a '
+                      'non-zero positive or negative number.')
+                return self.__tenants
+            break
 
+        existing = self.__tenants.findTenant(abs(self.__aptNum))
         if existing is not None:
             if self.__aptNum < 0:
                 tenant = existing.getTenant()
