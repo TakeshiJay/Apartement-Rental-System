@@ -8,7 +8,7 @@
 #        @author Matthew Chung     #
 #                                  #
 # Due Jun 24, 2021 at 11:59 PM PDT #
-# Finished: TBD at TBD             #
+# Finished: Jun 27, 2021           #
 #----------------------------------#
 # CSULB CECS 343 Intro to S/W Engr #
 # Professor Phuong Nguyen          #
@@ -19,6 +19,7 @@
 # objects consisting of attribute–value pairs and arrays
 # (or other serializable values)
 import json  # json used to read and write from persistent storage data file
+from enum import Enum
 from LoginInputScreen import LoginInputScreen
 from TenantList import TenantList
 from TenantInputScreen import TenantInputScreen
@@ -28,6 +29,12 @@ from RentInputScreen import RentInputScreen
 from RentRecords import RentRecords
 from UserList import UserList
 from AnnualReport import AnnualReport
+
+
+class LoginResult(Enum):
+    LOGIN = 1
+    NEWUSER = 2
+    QUIT = 3
 
 
 # UserInterface class conains the login and menu process
@@ -65,7 +72,7 @@ class UserInterface:  # user interface
         logonStatus = 0  # 0 means not logged in, 1 = logged in, 2 = quit
         while logonStatus == 0:
             logonStatus = self.logon_menu()
-            if logonStatus == 2:
+            if logonStatus == LoginResult.QUIT:
                 return False  # quit
 
         # Save logged-in user TenantList, ExpenseRecords and RentRecords
@@ -108,7 +115,8 @@ class UserInterface:  # user interface
             RIS = RentInputScreen(self.__rent_records, self.__tenants_list)
             self.__rent_records = RIS.inputRent(self.__loged_user_idx)
         elif scanner_2 == 'e':
-            EIS = ExpenseInputScreen(self.__expenses_List[self.__loged_user_idx])
+            EIS = ExpenseInputScreen(
+                self.__expenses_List[self.__loged_user_idx])
             EIS.inputExpense()
 
         self.store_to_file()
@@ -122,10 +130,14 @@ class UserInterface:  # user interface
             rentRecords = RentRecords(self.__rent_records, self.__tenants_list)
             rentRecords.display(self.__loged_user_idx)
         elif scanner_2 == 'e':
-            expenseRecords = ExpenseRecords(self.__expenses_List[self.__loged_user_idx])
+            expenseRecords = \
+                ExpenseRecords(self.__expenses_List[self.__loged_user_idx])
             expenseRecords.displaySummary()
         elif scanner_2 == 'a':
-            annualReport = AnnualReport(self.__expenses_List[self.__loged_user_idx], self.__rent_records, self.__tenants_list[self.__loged_user_idx])
+            annualReport = \
+                AnnualReport(self.__expenses_List[self.__loged_user_idx],
+                             self.__rent_records,
+                             self.__tenants_list[self.__loged_user_idx])
             annualReport.calc_netProfit()
             annualReport.displayAnnualSummary()
 
@@ -164,8 +176,8 @@ class UserInterface:  # user interface
 
     def print_menus(self, num):
         if num == 1:
-            print("Welcome to the Apartment Rental System - "
-                  "Multiuser Edition v0.4")
+            print("Welcome to the Apartment Rental System: "
+                  "Multiuser Edition v2.0.1")
             print("Please select one of the following login options:")
         elif num == 3:
             print("\nEnter 't' to add or replace a Tenant,")
