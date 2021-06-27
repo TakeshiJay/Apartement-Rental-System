@@ -1,0 +1,10 @@
+------READ ME------
+WINDOWS VERSION
+Step 1:
+Extract File from Downloads folder
+
+Step 2: 
+Run 'batch' by double clicking
+
+Step 3: 
+Program Running
