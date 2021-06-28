@@ -15,15 +15,21 @@
 
 
 class LoginInputScreen:
+    # __init__ constructor for username and password
+    # @param user_list 
     def __init__(self, user_list):
         self.__username = ""  # prefixing with __ enforces private access
         self.__password = ""
         self.__confirmPassword = ""
         self.__user_list = user_list
 
+    # getuserPassword return function for username and passsword
+    # @return __username, __password
     def getUserPassword(self):
         return(self.__username, self.__password)
 
+    # inputUser is a function that gets username and password
+    # @return getUsserPassword if passsword is not valid 
     def inputUser(self):
         self.__username = input('Enter your username: ')
         if self.__username == "":
