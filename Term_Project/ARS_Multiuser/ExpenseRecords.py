@@ -17,12 +17,15 @@ import tabulate
 
 
 class ExpenseRecords:
-    # Initialize expenses with empty dictionary and updates as needed
+    # __init__ initialize expenses with empty dictionary and updates as needed
+    # @param expenseRecord
     def __init__(self, expenseRecord):
         self.__expenses = {}
         self.__updatedList = expenseRecord
         self.__map = ['Year', 'Month', 'Day', 'Category', 'Payee', 'Amount']
 
+    # insertExp is a function that fills in dictionary
+    # @param expenseRecord 
     def insertExp(self, expenseRecord):
         year, month, day, category, payee, amount = expenseRecord.getExpense()
         self.__expenses['Year'] = year
@@ -33,14 +36,15 @@ class ExpenseRecords:
         self.__expenses['Amount'] = amount
         self.__updatedList.append(self.__expenses)
 
-    # If key is 'Amount' add the value of it to eTotal
+    # return_total_expenses is a function that returns total expenses 
+    # @return sum 
     def return_total_expenses(self):
         sum = 0.0
         for i in self.__updatedList:
             sum += i['Amount']
         return sum
 
-    # Print Expense Records
+    # displaySummary is a function that prints total expenses 
     def displaySummary(self):
         if len(self.__updatedList) < 1:
             print("\nNo expense records to display.\n")
