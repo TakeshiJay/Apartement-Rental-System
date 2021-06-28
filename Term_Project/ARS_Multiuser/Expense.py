@@ -25,9 +25,12 @@ class Expense:
         self.__payee = payee
         self.__amount = amount
 
+    # getExpense is a function that returns expense information inputted
+    # @return __year, __month, __day, __category, __payee, __amount
     def getExpense(self):
         return(self.__year, self.__month, self.__day, self.__category,
                self.__payee, self.__amount)
 
+    # validation is a function to pass 
     def validation(self):
         pass
