@@ -20,6 +20,9 @@ from ExpenseRecords import ExpenseRecords
 
 
 class ExpenseInputScreen:  # Expense input screen
+    
+    # __init__ constructor
+    # @param expense_list 
     def __init__(self, expense_list):
         self.__year = datetime.datetime.now().year
         self.__month = datetime.datetime.now().month
@@ -29,10 +32,14 @@ class ExpenseInputScreen:  # Expense input screen
         self.__amount = 0.00
         self.__expense_list = expense_list
 
+    # getExpense is a function that returns expense information
+    # @return __year, __month, __day, __category, __payee, __amount
     def getExpense(self):
         return(self.__year, self.__month, self.__day, self.__category,
                self.__payee, self.__amount)
 
+    # inputExpense is a function that takes in expense input and validates for organization
+    # @return __expenseList 
     def inputExpense(self):
         while True:
             yearStr = input(f"Enter expense year (default {self.__year}): ")
