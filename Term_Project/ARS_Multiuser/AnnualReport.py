@@ -25,12 +25,13 @@ class AnnualReport:
     def __init__(self, __expenseRecords, __rentRecords, tenant_list):
         self.__report1 = ExpenseRecords(__expenseRecords)
         self.__report2 = RentRecords(__rentRecords, tenant_list)
-
+    
+    # calc_netProfit 
     def calc_netProfit(self):
         netProfit = self.__report2.getSumOfRents() - self.__report1.return_total_expenses()
         return netProfit
 
-    # The whole annual summary
+    # displayAnnualSummary prints annual summary for inputted information
     def displayAnnualSummary(self):
         print("Annual Summary\n")
         rent_tot = self.__report2.getSumOfRents()
