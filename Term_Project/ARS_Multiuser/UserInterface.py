@@ -19,6 +19,7 @@
 # objects consisting of attribute–value pairs and arrays
 # (or other serializable values)
 import json  # json used to read and write from persistent storage data file
+import sys   # for exit(status)
 from enum import Enum
 from LoginInputScreen import LoginInputScreen
 from TenantList import TenantList
@@ -174,8 +175,8 @@ class UserInterface:  # user interface
                         self.__loged_user_idx = userList.get_logged_idx()
                         return 1  # logged in
             elif login.lower() == 'q':  # quit program
-                exit(0)
-                return 2  # quit program
+                sys.exit(0)
+                # return 2  # quit program
             else:
                 print(f'"{login}" is an invalid entry, please try again.')
         return 1  # logged-in
