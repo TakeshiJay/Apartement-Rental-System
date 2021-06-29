@@ -174,6 +174,7 @@ class UserInterface:  # user interface
                         self.__loged_user_idx = userList.get_logged_idx()
                         return 1  # logged in
             elif login.lower() == 'q':  # quit program
+                exit(0)
                 return 2  # quit program
             else:
                 print(f'"{login}" is an invalid entry, please try again.')
