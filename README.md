@@ -1,6 +1,7 @@
 # CECS-343
 CSU Long Beach CECS 343 Software Engineering with Prof. Phuong Nguyen (Summer 2021)
 
+WEBSITE: **http://Team6.pro**
 Apartment Rental System: Multiuser Edition v1.0
 Team 6: Sterling Engle (team leader), Jacob Sunia, Larry Delgado, and Matthew Chung
 
