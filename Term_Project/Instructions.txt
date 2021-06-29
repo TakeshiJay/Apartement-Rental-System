@@ -1,10 +1,20 @@
 ------READ ME------
-WINDOWS VERSION
-Step 1:
-Extract File from Downloads folder
+Note: Downloading the Windows or Mac version from http://Team6.pro website is recommended method.
 
-Step 2: 
-Run 'batch' by double clicking
+Apartment Rental System: Multiuser Edition v2.0.1 by Team 6
+WINDOWS VERSION ZIP FILE DEPLOYMENT INSTRUCTIONS
 
-Step 3: 
-Program Running
+Step 1. Unzip ARSteam6win10.zip file from Downloads folder
+
+Step 2. Run 'ARS' by double clicking it
+        This batch file automatically installs Python 3.8.5, a required module, then runs ARS.
+
+Step 3. Team 6 ARS Program Running
+
+Professor Phuong, please email, text or call Sterling Engle at 510-565-4700 if you have any issues to set up a Zoom
+to share your screen so we may assist you.
+
+Thanks!
+
+Team 6
+Sterling, Jacob, Larry, and Matthew

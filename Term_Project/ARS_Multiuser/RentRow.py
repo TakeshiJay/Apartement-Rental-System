@@ -15,6 +15,10 @@
 
 
 class RentRow:
+    # __init__ constructor
+    # @param name name
+    # @param month month
+    # @param amount amount
     def __init__(self, name, month, amount):
         #self.__rentRow = {}
         
@@ -22,15 +26,23 @@ class RentRow:
         self.__month = month
         self.__amount = amount
 
+    # get_name function to return name
+    # @return __name
     def get_name(self):
         return(self.__name)
 
+    # get_month function returns month
+    # @return __month
     def get_month(self):
         return(self.__month)
 
+    # get_amount function returns amount
+    # @return __amount
     def get_amount(self):
         return(self.__amount)
     
+    # getInfo return info
+    # @return __name, __month, __amount
     def getInfo(self):
         return(self.__name, self.__month, self.__amount)
     

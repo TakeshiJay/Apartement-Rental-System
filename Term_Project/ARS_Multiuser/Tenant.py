@@ -24,32 +24,47 @@ class Tenant:
         self.__aptNumber = aptNum
         self.__name = tenantName
 
+    # __del__
     def __del__(self):
         return
 
+    # getApt return apartment number
+    # @return __aptNumber
     def getApt(self):
         return self.__aptNumber
 
+    # getTenant function returns tenant name
+    # @return __name
     def getTenant(self):
         return self.__name
 
+    # getAptTenant function return tenant apartment
+    # @return __aptNumber, __name
     def getAptTenant(self):
         return self.__aptNumber, self.__name
 
+    # aptOccupied return name if occupied
+    # @param __name
     def aptOccupied(self):
         return self.__name is not None and self.__name != ""
 
+    # __lt__ checks if name is less than 
+    # @param other 
     def __lt__(self, other):
         if self.__name < other.getTenant():
             return True
         else:
             return False
 
+    # __eq__ checks if name is the same
+    # @param other 
     def __eq__(self, other):
         if self.__name == other.getTenant():
             return True
         else:
             return False
 
+    # __str__ returns apartment and tenant
+    # @return getApt, getTenant
     def __str__(self):
         return f"{self.getApt():5d} {self.getTenant()}"
