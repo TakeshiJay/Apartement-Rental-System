@@ -82,6 +82,11 @@ class UserInterface:  # user interface
         self.__tenantList = \
             TenantList(self.__tenants_list[self.__loged_user_idx])
         self.__tenantScreen = TenantInputScreen(self.__tenantList)
+
+        # __expenseRecords is a list of Expense objects for logged-in user
+        self.__expenseRecords = \
+            ExpenseRecords(self.__expenses_List[self.__loged_user_idx])
+        self.__expenseScreen = ExpenseInputScreen(self.__expenseRecords)
         # TODO
 
         scanner = ''
@@ -107,8 +112,9 @@ class UserInterface:  # user interface
                 print(f'"{scanner}" is an invalid option please try again.')
         return True
 
-    # inputScreen is a function that prints menu options for user input on desired tenant information to input
-    # @param scanner_2 scanner object for user input 
+    # inputScreen is a function that prints menu options for user input on
+    # desired tenant information to input
+    # @param scanner_2 scanner object for user input
     def inputScreen(self, scanner_2):
         if scanner_2 == 't':
             self.__tenantList = self.__tenantScreen.inputTenant()
@@ -119,13 +125,16 @@ class UserInterface:  # user interface
             RIS = RentInputScreen(self.__rent_records, self.__tenants_list)
             self.__rent_records = RIS.inputRent(self.__loged_user_idx)
         elif scanner_2 == 'e':
-            EIS = ExpenseInputScreen(
-                self.__expenses_List[self.__loged_user_idx])
-            EIS.inputExpense()
+            # EIS = ExpenseInputScreen(
+            #   self.__expenses_List[self.__loged_user_idx])
+            self.__expenseList = self.__expenseScreen.inputExpense()
+            self.__expenses_List[self.__loged_user_idx] = \
+                self.__expenseList.getExpenseDict()
 
         self.store_to_file()
 
-    # output_screen is a function that prints menu options for user input on which type of data is desired to display
+    # output_screen is a function that prints menu options for user input on
+    # which type of data is desired to display
     # @param scanner_2 scanner object for user input
     def output_screen(self, scanner_2):
         if scanner_2 == 't':

@@ -13,7 +13,10 @@
 ####################################
 """
 
-# from ExpenseInputScreen import ExpenseInputScreen
+from datetime import date
+# from datetime import timedelta
+
+epoch = date(2021, 1, 1)  # date epoch began Jan 1, 2021 before ARS
 
 
 class Expense:
@@ -21,16 +24,41 @@ class Expense:
         self.__year = year
         self.__month = month
         self.__day = day
-        self.__category = category
-        self.__payee = payee
+        self.__category = category.lower()
+        self.__payee = payee.lower()
         self.__amount = amount
 
-    # getExpense is a function that returns expense information inputted
+    # getExpense returns all private expense information:
     # @return __year, __month, __day, __category, __payee, __amount
     def getExpense(self):
-        return(self.__year, self.__month, self.__day, self.__category,
-               self.__payee, self.__amount)
+        return self.__year, self.__month, self.__day, \
+               self.__category.capitalize(), self.__payee.title(), \
+               self.__amount
 
-    # validation is a function to pass 
+    def getYear(self):
+        return self.__year
+
+    def getMonth(self):
+        return self.__month
+
+    def getDay(self):
+        return self.__day
+
+    def getCategory(self):
+        return self.__category.capitalize()
+
+    def getPayee(self):
+        return self.__payee.title()
+
+    def getAmount(self):
+        return self.__amount
+
+    # The "epoch" begins on Jan 1, 2021 which is day number 0 since ARS
+    # did not exist then
+    def getEpochDay(self):
+        expenseDay = date(self.getYear(), self.getMonth(), self.getDay())
+        return expenseDay - epoch
+
+    # validation is a function that always passes success now
     def validation(self):
         pass

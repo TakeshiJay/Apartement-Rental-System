@@ -14,7 +14,7 @@
 ####################################
 """
 
-# import tabulate
+import datetime
 from ExpenseRecords import ExpenseRecords
 from RentRecords import RentRecords
 
@@ -24,26 +24,37 @@ class AnnualReport:
     # __init__ constructor for self report 1 and 2
     # @param __expenseRecords
     # @param __rentRecords
-    # @param __tenant_list 
+    # @param __tenant_list
     def __init__(self, __expenseRecords, __rentRecords, tenant_list):
         self.__report1 = ExpenseRecords(__expenseRecords)
         self.__report2 = RentRecords(__rentRecords, tenant_list)
-    
+        self.__thisYear = datetime.datetime.now().year
+
     # calc_netProfit is a function that returns netProfit
-    # @return netProfit profit 
+    # @return netProfit profit
     def calc_netProfit(self):
-        netProfit = self.__report2.getSumOfRents() - self.__report1.return_total_expenses()
+        netProfit = self.__report2.getSumOfRents() - \
+            self.__report1.return_total_expenses(self.__thisYear)
         return netProfit
 
-    # displayAnnualSummary is a function that prints annual summary from inputted information
+    # displayAnnualSummary is a function that prints annual summary
+    # from inputted information
     def displayAnnualSummary(self):
-        print("Annual Summary\n")
+        print("")
+        print(f"        {self.__thisYear} Annual Summary")
+        print("")
         rent_tot = self.__report2.getSumOfRents()
-        expe_tot = self.__report1.return_total_expenses()
+
+        self.__report1.sortExpenses(1)
+        expe_tot = self.__report1.return_total_expenses(self.__thisYear)
+        self.__report1.sortExpenses(0)
 
         print('Income')
-        print('Rent Total: $', rent_tot)
-        print(" ")
-        print('Expense Total: $', expe_tot)
+        print(f"Rent Total:            ${rent_tot:10.2f}")
+        print("")
+        self.__report1.displayExpenseYearCategories(self.__thisYear)
+        print("")
+        print(f"Expense Total:         ${expe_tot:10.2f}")
         # Net Profit
-        print("\nNet Profit: " + str(self.calc_netProfit()))
+        print("")
+        print(f"Net Profit:            ${self.calc_netProfit():10.2f}")
