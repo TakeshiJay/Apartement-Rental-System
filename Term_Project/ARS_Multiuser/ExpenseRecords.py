@@ -56,3 +56,19 @@ class ExpenseRecords:
         print(tabulate.tabulate(rows, headers, tablefmt='rst'))
         # Print Expense Total Last
         print(f"Total Expenses: ${self.return_total_expenses():0.2f}")
+
+    def displayCatExp(self):
+        catSum = 0
+        print("Category Expense Sub-Total")
+        print("======== =================")
+        copiedList = []
+        '''
+        for i in self.__updatedList:
+            if i['Category'] == i-1['Category']:
+                catSum = catSum + i-1['Amount']
+            else:
+                print(f"{i['Category']},    {i['Amount']}")
+        for i in self.__updatedList:
+                if i['Category'] == i-1['Category']:
+                '''
+                    
