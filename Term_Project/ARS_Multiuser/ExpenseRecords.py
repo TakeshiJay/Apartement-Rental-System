@@ -67,7 +67,7 @@ class ExpenseRecords:
         self.__newExpense = Expense(year, month, day, category, payee, amount)
         self.__updatedList.append(self.__newExpense)
         # keep expenses sorted by year, month, day ascending
-        self.sortExpense()
+        self.sortExpenses()
 
     def displayExpenseYearCategories(self, year):
         cat = ""
