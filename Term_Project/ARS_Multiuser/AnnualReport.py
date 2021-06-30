@@ -36,6 +36,7 @@ class AnnualReport:
         netProfit = self.__report2.getSumOfRents() - \
             self.__report1.return_total_expenses(self.__thisYear)
         return netProfit
+<<<<<<< HEAD
 
     # displayAnnualSummary is a function that prints annual summary
     # from inputted information
@@ -43,12 +44,19 @@ class AnnualReport:
         print("")
         print(f"        {self.__thisYear} Annual Summary")
         print("")
+=======
+        
+    # displayAnnualSummary is a function that prints annual summary from inputted information
+    def displayAnnualSummary(self):
+        print("Annual Summary\n----------------")
+>>>>>>> 5bb3948e52ca0133dbd31cdeff69a946214540dc
         rent_tot = self.__report2.getSumOfRents()
 
         self.__report1.sortExpenses(1)
         expe_tot = self.__report1.return_total_expenses(self.__thisYear)
         self.__report1.sortExpenses(0)
 
+<<<<<<< HEAD
         print('Income')
         print(f"Rent Total:            ${rent_tot:10.2f}")
         print("")
@@ -58,3 +66,13 @@ class AnnualReport:
         # Net Profit
         print("")
         print(f"Net Profit:            ${self.calc_netProfit():10.2f}")
+=======
+        print('Income\n----------------')
+        print('Rent Total: $', rent_tot, '\n----------------')
+        cat_exp = self.__report1.displayCatExp()
+        print(" ")
+        print('Expense Total: $', expe_tot, '\n----------------')
+        # Net Profit
+        print("\nNet Profit: " + str(self.calc_netProfit()))
+            
+>>>>>>> 5bb3948e52ca0133dbd31cdeff69a946214540dc

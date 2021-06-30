@@ -31,6 +31,8 @@ from RentRecords import RentRecords
 from UserList import UserList
 from AnnualReport import AnnualReport
 
+globalVersion = "2.0.2"
+
 
 class LoginResult(Enum):
     LOGIN = 1
@@ -68,7 +70,7 @@ class UserInterface:  # user interface
         self.__expenseRecords = None  # logged-in user ExpenseRecords
         self.__rentRecords = None  # logged-in user RentRecords
 
-    # loginMainMenu is a function that prints menu options for user input on desired program functionality  
+    # loginMainMenu prints menu options for user input to select program funcs.
     def loginMainMenu(self):
         self.print_menus(1)
         logonStatus = 0  # 0 means not logged in, 1 = logged in, 2 = quit
@@ -155,7 +157,7 @@ class UserInterface:  # user interface
             annualReport.calc_netProfit()
             annualReport.displayAnnualSummary()
 
-    # logon_menu is a function that takes prints menu item and takes in user input for login and user purposes 
+    # logon_menu prints menu item and takes user input for login/new user
     def logon_menu(self):
         user = LoginInputScreen(self.__UserList)
         userList = UserList(self.__UserList, self.__password,
@@ -190,11 +192,11 @@ class UserInterface:  # user interface
                 print(f'"{login}" is an invalid entry, please try again.')
         return 1  # logged-in
 
-    # print_menus is a function that prints menu options to user for input on tenant finance information
+    # print_menus prints menu options for input of tenant finance information
     def print_menus(self, num):
         if num == 1:
             print("Welcome to the Apartment Rental System: "
-                  "Multiuser Edition v2.0.1")
+                  f"Multiuser Edition v{globalVersion}")
             print("Please select one of the following login options:")
         elif num == 3:
             print("\nEnter 't' to add or replace a Tenant,")
