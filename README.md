@@ -1,4 +1,4 @@
-# CECS-343
+# Apartment Rental System
 CSU Long Beach CECS 343 Software Engineering with Prof. Phuong Nguyen (Summer 2021)
 
 WEBSITE: **http://Team6.pro**
